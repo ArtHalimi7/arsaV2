@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Poppins', serif;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .max-container {
+    @apply max-w-5xl mx-auto sm:p-16 pb-12 !pt-[126px] px-8 min-h-[calc(100vh-80px)];
+  }
+  .header {
+    @apply flex justify-between items-center w-full mx-auto bg-transparent;
+  }
+
+}
+
+/*HERO SECTION*/ 
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 60vh;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: 2000px;
+  height: 550px;
+  gap: 1px;
+}
+
+.grid-item {
+  background-color: black;
+  transition: background-color background-color 5s ease-out-out;
+}
+
+
+.grid-item:hover {
+  background-color: #6269D0;
+}
+
+.centered-text {
+  position: absolute;
+  color: white;
+  text-align: center;
+}
+
+.centered-text h1 {
+  font-size: 5rem;
+  font-weight: bold;
+}
+
+.centered-text p {
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+
+.grid-item:not(:last-child) {
+  border-right: 1px solid #333;
+}
+.grid > :nth-child(8n) {
+  border-right: none;
+}
+.grid-item:not(:nth-last-child(-n+8)) {
+  border-bottom: 1px solid #333;
+}
