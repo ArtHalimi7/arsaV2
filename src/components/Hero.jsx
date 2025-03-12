@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <section id='hero'>
         <div>
-            <h1>Lorem ipsum </h1>
+
         </div>
     </section>
   )
