@@ -3,13 +3,14 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './index.css';
 import { Home, About, Services, Contact} from './pages';
 import Navbar from './components/Navbar';
+import WhatsappWidget from './components/WhatsappWidget';
+
 const App = () => {
-  
   return (
     <>
       <main className='background1'>
         <Router>
-        <Navbar/>
+          <Navbar/>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </Router>
+        <WhatsappWidget />
       </main>
     </>
   );
