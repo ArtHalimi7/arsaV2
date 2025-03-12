@@ -1,9 +1,9 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -24,8 +24,27 @@ export default {
       },
       boxShadow: {
         card: '0px 1px 2px 0px rgba(0, 0, 0, 0.05)'
+      },
+      animation: {
+        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        blob: "blob 7s infinite"
+      },
+      keyframes: {
+        blob: {
+          "0%": {
+            transform: "translate(0px, 0px) scale(1)"
+          },
+          "33%": {
+            transform: "translate(30px, -50px) scale(1.1)"
+          },
+          "66%": {
+            transform: "translate(-20px, 20px) scale(0.9)"
+          },
+          "100%": {
+            transform: "translate(0px, 0px) scale(1)"
+          }
+        }
       }
-      
     },
   },
   plugins: [],
