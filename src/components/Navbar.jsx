@@ -45,34 +45,64 @@ const Navbar = () => {
         }}
       >
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between h-24 rounded-2xl bg-gradient-to-r from-white/10 via-blue-100/10 to-white/10 backdrop-blur-lg border border-blue-200/20 shadow-lg px-6 relative">
-            {/* Subtle inner glow */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/5 to-transparent"></div>
+          <motion.div 
+            className="flex items-center justify-between h-24 rounded-2xl bg-gradient-to-r from-white/10 via-blue-100/20 to-white/10 backdrop-blur-lg border border-double border-blue-300 shadow-lg px-6 relative overflow-hidden"
+            whileHover={{ scale: 1.01 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Animated gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-blue-500/5 animate-gradient-x"></div>
             
-            {/* Logo with background decoration */}
-            <div className="relative">
-              <motion.div 
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="absolute inset-0 -m-2 bg-blue-500/20 backdrop-blur-sm rounded-full"
-              />
+            {/* Floating particles effect */}
+            <div className="absolute inset-0 overflow-hidden">
+              {[...Array(5)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 rounded-full bg-blue-400/10"
+                  animate={{
+                    x: [0, 100, 0],
+                    y: [0, -50, 0],
+                    opacity: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    delay: i * 0.8,
+                    ease: "linear",
+                  }}
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Logo with hover effect */}
+            <motion.div 
+              className="relative"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
               <Link to="/" className="relative flex items-center">
                 <img 
                   src={logo} 
                   alt="ARSA Logo" 
-                  className="h-16 w-auto relative z-10"
+                  className="h-20 w-auto relative z-10 drop-shadow-lg"
                 />
               </Link>
-            </div>
+            </motion.div>
 
-            {/* Menu Button */}
-            <button
+            {/* Menu Button with improved hover effect */}
+            <motion.button
               onClick={() => setIsOpen(true)}
-              className="p-3 rounded-xl bg-white/20 hover:bg-white/30 transition-colors duration-300 relative"
+              className="p-3 rounded-xl bg-gradient-to-r from-blue-500/10 to-blue-600/10 hover:from-blue-500/20 hover:to-blue-600/20 transition-all duration-300 relative group"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
               aria-label="Open menu"
             >
               <svg
-                className="h-10 w-10 text-blue-600"
+                className="h-10 w-10 text-blue-600 transition-transform duration-300 group-hover:rotate-90"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -82,8 +112,8 @@ const Navbar = () => {
               >
                 <path d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </div>
       </motion.nav>
 
@@ -100,13 +130,13 @@ const Navbar = () => {
               className="fixed inset-0 bg-black/30 z-50 backdrop-blur-md"
             />
 
-            {/* Updated Sidebar */}
+            {/* Updated Sidebar with narrower mobile width */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 20 }}
-              className="fixed top-0 right-0 h-full w-full max-w-md md:max-w-xl lg:max-w-2xl bg-gradient-to-br from-blue-900 to-blue-800 z-50 shadow-2xl border-l border-white/20"
+              className="fixed top-0 right-0 h-full w-4/5 sm:w-full sm:max-w-md md:max-w-xl lg:max-w-2xl bg-gradient-to-br from-blue-900 to-blue-800 z-50 border-l border-white/20"
             >
               {/* Close Button */}
               <button

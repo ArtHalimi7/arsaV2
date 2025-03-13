@@ -5,7 +5,6 @@ import heroRightImage from '../assets/images/heroright.png';
 const words = [
   "Trockenbau",
   "Gipsarbeiten",
-  "Spachtelarbeiten",
   "Akustikdecken",
   "Brandschutz"
 ];
@@ -124,7 +123,7 @@ const BrickBackground = () => {
 
 const DecorativeImage = () => {
   return (
-    <div className="absolute right-[-50px] bottom-0 hidden lg:block w-[500px] h-[500px] z-30">
+    <div className="absolute right-[-50px] bottom-0 lg:block w-[350px] sm:w-[400px] md:w-[450px] lg:w-[500px] h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px] z-30">
       {/* Construction Worker Image */}
       <motion.div
         initial={{ opacity: 0, y: 100 }}
@@ -164,15 +163,15 @@ const Hero = () => {
 
   return (
     <section className="relative h-[100vh] w-full overflow-hidden bg-gradient-to-br from-white to-blue-50">
-      <div className="absolute inset-0 z-20 flex flex-col items-start justify-center px-4 sm:px-8 md:px-16 lg:px-24">
-        <div className="w-full max-w-[90vw] lg:max-w-[50vw]">
+      <div className="absolute inset-0 z-20 flex flex-col items-center sm:items-start justify-center px-4 sm:px-8 md:px-16 lg:px-24">
+        <div className="w-full max-w-[90vw] lg:max-w-[50vw] text-center sm:text-left">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="mb-8 w-full"
+            className="mb-4 sm:mb-8 w-full"
           >
-            <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-blue-900">
+            <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-blue-900">
               Qualität in
             </span>
             <span className="block h-[100px] sm:h-[120px] md:h-[140px] lg:h-[180px]">
@@ -183,7 +182,7 @@ const Hero = () => {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -50, opacity: 0 }}
                   transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className="block text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold text-blue-600"
+                  className="block text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold text-blue-600"
                 >
                   {words[currentWord]}
                 </motion.span>
@@ -194,13 +193,13 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-12"
+            className="mt-8 sm:mt-12"
           >
-            <button className="group relative rounded-lg bg-blue-600 px-8 py-4 text-xl md:text-2xl font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700 hover:shadow-blue-500/25">
+            <button className="group relative rounded-lg bg-blue-600 px-7 sm:px-8 py-3.5 sm:py-4 text-xl sm:text-xl md:text-2xl font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700 hover:shadow-blue-500/25">
               <span className="relative flex items-center gap-2">
                 Kontaktieren Sie uns
                 <svg 
-                  className="h-6 w-6 transform transition-transform duration-300 group-hover:translate-x-1" 
+                  className="h-5 w-5 sm:h-6 sm:w-6 transform transition-transform duration-300 group-hover:translate-x-1" 
                   fill="none" 
                   viewBox="0 0 24 24" 
                   stroke="currentColor"
