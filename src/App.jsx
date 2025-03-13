@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './index.css';
-import { Home, About, Services, Contact} from './pages';
+import { Home, About, Projects, Contact} from './pages';
 import Navbar from './components/Navbar';
 import WhatsappWidget from './components/WhatsappWidget';
 import Lenis from '@studio-freight/lenis';
@@ -43,8 +43,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/projekte" element={<Projects />} />
+            <Route path="/kontakt" element={<Contact />} />
           </Routes>
         </Router>
         <WhatsappWidget />

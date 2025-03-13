@@ -4,11 +4,9 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/images/logostroke.png';
 
 const menuItems = [
-  { title: 'Home', href: '/' },
-  { title: 'Leistungen', href: '/services' },
   { title: 'Über Uns', href: '/about' },
-  { title: 'Projekte', href: '/projects' },
-  { title: 'Kontakt', href: '/contact' },
+  { title: 'Projekte', href: '/projekte' },
+  { title: 'Kontakt', href: '/kontakt' },
 ];
 
 const Navbar = () => {
