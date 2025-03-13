@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
 const useMediaQuery = (query) => {
   const [matches, setMatches] = useState(false);
@@ -22,42 +22,113 @@ const services = [
     title: "Trockenbau",
     description: "Professionelle Wandsysteme & Deckenverkleidungen",
     details: "Modernste Techniken für perfekte Raumgestaltung. Vom Metallständerwerk bis zur fertigen Wand – wir schaffen Räume nach Ihren Vorstellungen.",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.0&auto=format&fit=crop&w=800&q=80"
+    image: "https://trockenbau-muc.de/wp-content/uploads/2024/11/Wandkonstruktion-Trockenbau-mit-Schiebertuer-1024x576.jpg"
   },
   {
     title: "Spachtelarbeiten",
     description: "Perfekte Oberflächengestaltung",
     details: "Glatte Wände und makellose Oberflächen sind unsere Spezialität. Mit präziser Handarbeit und hochwertigen Materialien erreichen wir optimale Ergebnisse.",
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.0&auto=format&fit=crop&w=800&q=80"
+    image: "https://www.trockenbau-ivkovic.de/images/3003/0/0/spachtelarbeiten.jpg"
   },
   {
     title: "Akustikbau",
     description: "Optimale Raumakustik für jeden Bereich",
     details: "Innovative Akustiklösungen für Büros, Konferenzräume und Wohnbereiche. Wir optimieren die Raumakustik für maximalen Komfort.",
-    image: "https://images.unsplash.com/photo-1616591174726-737d24c61a2a?ixlib=rb-4.0.0&auto=format&fit=crop&w=800&q=80"
+    image: "https://akustikbau-mack.de/wp-content/uploads/2018/04/Mack-Banner.jpg"
   },
   {
     title: "Brandschutz",
     description: "Sichere & normgerechte Brandschutzsysteme",
     details: "Zertifizierte Brandschutzsysteme nach aktuellen Normen. Wir garantieren höchste Sicherheitsstandards für Ihr Gebäude.",
-    image: "https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?ixlib=rb-4.0.0&auto=format&fit=crop&w=800&q=80"
+    image: "https://www.heinrich-schmid.com/fileadmin/user_upload/leistung-brandschutz-brandschutz-im-trockenbau-intro.jpg"
   }
 ];
+
 
 const HorizontalScrollSection = () => {
   const targetRef = useRef(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const [activeIndex, setActiveIndex] = useState(0);
   
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end end"]
   });
 
+  // Keep the existing transform values
   const x = useTransform(
     scrollYProgress,
     [0, 1],
-    ["0%", isMobile ? "-65%" : "-51%"]
+    ["0%", isMobile ? "-65%" : "-36%"]
   );
+  
+  // Use scrollYProgress to determine active card
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.onChange((progress) => {
+      // Calculate which card should be active based on scroll progress
+      const newIndex = Math.min(
+        services.length - 1, 
+        Math.floor(progress * services.length * 1.5)
+      );
+      setActiveIndex(newIndex);
+    });
+    
+    return () => unsubscribe();
+  }, [scrollYProgress]);
+
+  // Card variants for animations
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0.8,
+      y: 100,
+      rotateX: 15
+    },
+    visible: index => ({ 
+      opacity: 1, 
+      scale: 1,
+      y: 0,
+      rotateX: 0,
+      transition: { 
+        type: "spring", 
+        stiffness: 100,
+        damping: 15,
+        delay: index * 0.1,
+        duration: 0.8
+      }
+    }),
+    active: { 
+      scale: 1.05,
+      y: -20,
+      boxShadow: "0 30px 60px rgba(0,0,0,0.3)",
+      transition: { 
+        type: "spring", 
+        stiffness: 300,
+        damping: 20 
+      }
+    },
+    inactive: { 
+      scale: 0.95,
+      transition: { 
+        type: "spring", 
+        stiffness: 300,
+        damping: 20 
+      }
+    }
+  };
+
+  // Content animation variants
+  const contentVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: delay => ({
+      opacity: 1,
+      y: 0,
+      transition: { 
+        duration: 0.5, 
+        delay 
+      }
+    })
+  };
 
   return (
     <section 
@@ -65,64 +136,89 @@ const HorizontalScrollSection = () => {
       className="relative h-[300vh] bg-gradient-to-b from-blue-800 via-blue-900 to-blue-950"
     >
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-        <motion.div style={{ x }} className="flex gap-4 md:gap-8 lg:gap-12 pl-4 md:pl-8 lg:pl-12">
+        {/* Title with improved positioning */}
+        <motion.h1 
+          className="text-3xl md:text-4xl lg:text-5xl font-bold text-white absolute top-8 md:top-20 left-0 right-0 text-center mx-auto px-4"
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Unsere Leistungen
+        </motion.h1>
+        
+        <motion.div style={{ x }} className="flex gap-4 md:gap-6 lg:gap-8 pl-4 md:pl-6 lg:pl-8">
           {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ 
-                opacity: 0, 
-                x: 200, // Start from right
-                y: 50 // Start from below
-              }}
-              whileInView={{ 
-                opacity: 1, 
-                x: 0,
-                y: 0
-              }}
-              transition={{ 
-                duration: 0.8,
-                delay: index * 0.2, // Stagger the animations
-                type: "spring",
-                stiffness: 100
-              }}
-              viewport={{ once: true, margin: "-20%" }} // Trigger animation when card is 20% in view
-              className="relative flex-shrink-0 w-[280px] h-[400px] md:w-[600px] md:h-[500px] lg:w-[900px] lg:h-[600px] overflow-hidden rounded-xl md:rounded-2xl"
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center z-0"
-                style={{ backgroundImage: `url(${service.image})` }}
+            <AnimatePresence key={index}>
+              <motion.div
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                animate={index === activeIndex ? "active" : "inactive"}
+                variants={cardVariants}
+                viewport={{ once: false, margin: "-20%" }}
+                className="relative flex-shrink-0 w-[260px] h-[380px] md:w-[500px] md:h-[450px] lg:w-[700px] lg:h-[500px] overflow-hidden rounded-xl md:rounded-2xl transform-gpu"
+                whileHover={{ 
+                  scale: 1.03, 
+                  transition: { duration: 0.2 } 
+                }}
               >
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80" />
-              </div>
-              <div className="relative z-10 p-6 md:p-12 lg:p-16 flex flex-col justify-between h-full">
-                <div>
-                  <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                {/* Background image with parallax effect */}
+                <motion.div
+                  className="absolute inset-0 bg-cover bg-center z-0"
+                  style={{ 
+                    backgroundImage: `url(${service.image})`,
+                    backgroundSize: "110% 110%",
+                    backgroundPosition: "center"
+                  }}
+                  animate={{
+                    backgroundSize: index === activeIndex ? "105% 105%" : "110% 110%",
+                    backgroundPosition: index === activeIndex ? "center" : "center"
+                  }}
+                  transition={{ duration: 3, ease: "easeOut" }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80" />
+                </motion.div>
+                
+                <div className="relative z-10 p-5 md:p-8 lg:p-12 flex flex-col justify-between h-full">
+                  <div>
+                    <motion.h2
+                      custom={0.1}
+                      variants={contentVariants}
+                      className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-2 md:mb-4"
+                    >
+                      {service.title}
+                    </motion.h2>
+                    
+                    <motion.p
+                      custom={0.3}
+                      variants={contentVariants}
+                      className="text-base md:text-xl lg:text-2xl text-blue-200 mb-2 md:mb-3"
+                    >
+                      {service.description}
+                    </motion.p>
+                    
+                    <motion.p
+                      custom={0.5}
+                      variants={contentVariants}
+                      className="text-sm md:text-base lg:text-lg text-gray-300"
+                    >
+                      {service.details}
+                    </motion.p>
+                  </div>
+                  
+                  {/* Indicator showing when a card is active */}
+                  <motion.div
+                    initial={{ width: "0%" }}
+                    animate={{ 
+                      width: index === activeIndex ? "100%" : "0%",
+                      opacity: index === activeIndex ? 1 : 0
+                    }}
                     transition={{ duration: 0.8 }}
-                    className="text-3xl md:text-5xl lg:text-8xl font-bold text-white mb-4 md:mb-6"
-                  >
-                    {service.title}
-                  </motion.h2>
-                  <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-lg md:text-2xl lg:text-3xl text-blue-200 mb-2 md:mb-4"
-                  >
-                    {service.description}
-                  </motion.p>
-                  <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-sm md:text-lg lg:text-xl text-gray-300"
-                  >
-                    {service.details}
-                  </motion.p>
+                    className="h-1 bg-blue-300 absolute bottom-0 left-0"
+                  />
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </AnimatePresence>
           ))}
         </motion.div>
       </div>

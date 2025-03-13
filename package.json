@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.1.0",
+    "@react-three/drei": "^10.0.4",
+    "@react-three/fiber": "^9.1.0",
     "@tabler/icons-react": "^3.31.0",
+    "caniuse-lite": "^1.0.30001704",
     "clsx": "^2.1.1",
     "framer-motion": "^12.5.0",
     "motion": "^12.5.0",
@@ -24,7 +27,8 @@
     "react-whatsapp": "^0.3.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.8",
-    "tailwind-merge": "^3.0.2"
+    "tailwind-merge": "^3.0.2",
+    "three": "^0.174.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.55",

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
 
@@ -13,11 +13,37 @@ const menuItems = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  
+  const { scrollY } = useScroll();
+  
+  // Use Framer Motion's useMotionValueEvent to detect scroll direction
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    // Check if we're scrolling up or down
+    const currentScrollY = latest;
+    const scrollingDown = currentScrollY > lastScrollY;
+    const scrollDifference = Math.abs(currentScrollY - lastScrollY);
+    
+    // Only trigger hide/show when scroll amount is significant
+    if (scrollDifference > 10) {
+      setVisible(!scrollingDown || currentScrollY < 50);
+      setLastScrollY(currentScrollY);
+    }
+  });
 
   return (
     <>
       {/* Main Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-4 py-4">
+      <motion.nav 
+        className="fixed top-0 left-0 right-0 z-50 px-4 py-4"
+        initial={{ y: 0 }}
+        animate={{ y: visible ? 0 : -120 }}
+        transition={{ 
+          duration: 0.3,
+          ease: "easeInOut"
+        }}
+      >
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between h-24 rounded-2xl bg-gradient-to-r from-white/10 via-blue-100/10 to-white/10 backdrop-blur-lg border border-blue-200/20 shadow-lg px-6 relative">
             {/* Subtle inner glow */}
@@ -59,7 +85,7 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Sidebar Menu */}
       <AnimatePresence>

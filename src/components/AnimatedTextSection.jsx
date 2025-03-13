@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const AnimatedTextSection = () => {
   return (
-    <section className="relative h-[50vh] w-full bg-white text-blue-900 overflow-hidden">
+    <section className="relative h-[50vh] w-full bg-blue-900 text-white overflow-hidden">
       <div className="absolute inset-0 flex flex-col justify-center">
         {/* Large Background Text */}
         <div className="relative flex whitespace-nowrap">
@@ -15,7 +15,7 @@ const AnimatedTextSection = () => {
               repeat: Infinity,
               ease: 'linear',
             }}
-            className="whitespace-nowrap text-[180px] font-bold text-blue-100 flex-shrink-0"
+            className="whitespace-nowrap text-[180px] font-bold text-blue-800/20 flex-shrink-0"
             >
             ARSA GIPSER QUALITÄT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </motion.div>
@@ -27,7 +27,7 @@ const AnimatedTextSection = () => {
               repeat: Infinity,
               ease: 'linear',
             }}
-            className="whitespace-nowrap text-[180px] font-bold text-blue-100 flex-shrink-0"
+            className="whitespace-nowrap text-[180px] font-bold text-blue-800/20 flex-shrink-0"
           >
             ARSA GIPSER QUALITÄT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </motion.div>
@@ -43,9 +43,9 @@ const AnimatedTextSection = () => {
               viewport={{ once: true }}
               className="max-w-5xl mx-auto text-center"
             >
-              <p className="text-2xl md:text-5xl text-blue-800 leading-relaxed">
-                Als führendes Unternehmen im Trockenbau mit <span className="text-5xl md:text-5xl font-bold text-blue-600">20+ Jahren</span> Expertise 
-                und über <span className="text-5xl md:text-5xl font-bold text-blue-600">500+ erfolgreichen Projekten</span> setzen 
+              <p className="text-2xl md:text-5xl text-white leading-relaxed">
+                Als führendes Unternehmen im Trockenbau mit <span className="text-5xl md:text-5xl font-bold text-blue-200">20+ Jahren</span> Expertise 
+                und über <span className="text-5xl md:text-5xl font-bold text-blue-200">500+ erfolgreichen Projekten</span> setzen 
                 wir neue Maßstäbe für Qualität und Präzision
               </p>
             </motion.div>
