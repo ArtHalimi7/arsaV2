@@ -16,7 +16,7 @@ const AnimatedBrick = ({ x, y, delay }) => {
   // Add slight random variations to make bricks look imperfect
   const height = 50 + (Math.random() * 4 - 2);
   const width = 100 + (Math.random() * 6 - 3);
-  const roughness = 2; // Controls how "rough" the brick edges are
+  const roughness = 2; // Increased roughness for more texture
   
   // Create slightly irregular brick path
   const path = [
@@ -43,7 +43,7 @@ const AnimatedBrick = ({ x, y, delay }) => {
     <motion.path
       d={path}
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="2.5" // Increased from 1.5 to 2.5 for thicker lines
       fill={isHovered ? "currentColor" : "none"}
       initial={{ pathLength: 0, opacity: 0 }}
       animate={controls}
@@ -53,7 +53,7 @@ const AnimatedBrick = ({ x, y, delay }) => {
       }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className={`${isHovered ? 'text-blue-500/30' : 'text-blue-300'} transition-colors duration-300`}
+      className={`${isHovered ? 'text-blue-500/40' : 'text-blue-300'} transition-colors duration-300`} // Enhanced colors
     />
   );
 };

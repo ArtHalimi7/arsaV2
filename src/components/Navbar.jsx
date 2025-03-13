@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/logostroke.png';
 
 const menuItems = [
   { title: 'Home', href: '/' },
@@ -36,88 +36,131 @@ const Navbar = () => {
     <>
       {/* Main Navbar */}
       <motion.nav 
-        className="fixed top-0 left-0 right-0 z-50 px-4 py-4"
+        className="fixed top-0 left-0 right-0 z-50"
         initial={{ y: 0 }}
-        animate={{ y: visible ? 0 : -120 }}
+        animate={{ y: visible ? 0 : -130 }} // Adjusted value to match new height
         transition={{ 
           duration: 0.3,
           ease: "easeInOut"
         }}
       >
-        <div className="max-w-7xl mx-auto">
-          <motion.div 
-            className="flex items-center justify-between h-24 rounded-2xl bg-gradient-to-r from-white/10 via-blue-100/20 to-white/10 backdrop-blur-lg border border-double border-blue-300 shadow-lg px-6 relative overflow-hidden"
-            whileHover={{ scale: 1.01 }}
-            transition={{ duration: 0.2 }}
-          >
-            {/* Animated gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-blue-500/5 animate-gradient-x"></div>
-            
-            {/* Floating particles effect */}
-            <div className="absolute inset-0 overflow-hidden">
-              {[...Array(5)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 rounded-full bg-blue-400/10"
-                  animate={{
-                    x: [0, 100, 0],
-                    y: [0, -50, 0],
-                    opacity: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    delay: i * 0.8,
-                    ease: "linear",
-                  }}
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                  }}
-                />
-              ))}
-            </div>
-
-            {/* Logo with hover effect */}
-            <motion.div 
-              className="relative"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            >
-              <Link to="/" className="relative flex items-center">
-                <img 
-                  src={logo} 
-                  alt="ARSA Logo" 
-                  className="h-20 w-auto relative z-10 drop-shadow-lg"
-                />
-              </Link>
-            </motion.div>
-
-            {/* Menu Button with improved hover effect */}
-            <motion.button
-              onClick={() => setIsOpen(true)}
-              className="p-3 rounded-xl bg-gradient-to-r from-blue-500/10 to-blue-600/10 hover:from-blue-500/20 hover:to-blue-600/20 transition-all duration-300 relative group"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Open menu"
-            >
-              <svg
-                className="h-10 w-10 text-blue-600 transition-transform duration-300 group-hover:rotate-90"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+        <motion.div 
+          className="w-full bg-gradient-to-r from-blue-700 to-blue-900 shadow-lg backdrop-blur-sm relative overflow-hidden"
+          initial={{ height: '100px' }}  // Increased height
+          animate={{ height: '100px' }}  // Increased height
+        >
+          {/* Blueprint texture overlay */}
+          <div className="absolute inset-0 opacity-10">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <pattern id="blueprint-grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#ffffff" strokeWidth="0.5"/>
+              </pattern>
+              <rect width="100%" height="100%" fill="url(#blueprint-grid)" />
+            </svg>
+          </div>
+          
+          {/* Larger blueprint elements */}
+          <div className="absolute inset-0 opacity-5">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <pattern id="blueprint-large" x="0" y="0" width="100" height="80" patternUnits="userSpaceOnUse">
+                <circle cx="20" cy="40" r="2" fill="none" stroke="#ffffff" strokeWidth="0.5"/>
+                <circle cx="80" cy="40" r="2" fill="none" stroke="#ffffff" strokeWidth="0.5"/>
+                <path d="M 0 20 L 100 20" stroke="#ffffff" strokeWidth="0.5" strokeDasharray="5,5"/>
+                <path d="M 0 60 L 100 60" stroke="#ffffff" strokeWidth="0.5" strokeDasharray="5,5"/>
+              </pattern>
+              <rect width="100%" height="100%" fill="url(#blueprint-large)" />
+            </svg>
+          </div>
+          
+          <div className="max-w-full mx-auto px-6 lg:px-12 h-full relative z-10">
+            <div className="flex items-center justify-between h-full">
+              {/* Logo with hover effect - adjusted for larger navbar */}
+              <motion.div 
+                className="relative p-2"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <path d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
-            </motion.button>
-          </motion.div>
-        </div>
+                <Link to="/" className="relative flex items-center">
+                  <img 
+                    src={logo} 
+                    alt="ARSA Logo" 
+                    className="h-24 w-auto relative z-10 drop-shadow-lg" // Increased logo size
+                  />
+                </Link>
+              </motion.div>
+              
+              {/* Desktop Navigation Links with enhanced hover effects */}
+              <div className="hidden md:flex items-center space-x-12">
+                {menuItems.map((item) => (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0.9 }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      opacity: 1
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    className="relative pb-1" // Added padding for underline space
+                  >
+                    <Link
+                      to={item.href}
+                      className="text-white text-2xl font-medium relative group overflow-hidden" // Increased font size
+                    >
+                      <span className="relative z-10">{item.title}</span>
+                      
+                      {/* Primary animated underline */}
+                      <motion.div
+                        className="absolute bottom-0 left-0 w-full h-[4px] bg-white shadow-glow" // Thicker underline with glow
+                        initial={{ scaleX: 0, originX: 0 }}
+                        whileHover={{ scaleX: 1, originX: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                      />
+                      
+                      {/* Secondary animated underline for glow effect */}
+                      <motion.div
+                        className="absolute bottom-0 left-0 w-full h-[2px] bg-white/60 blur-[1px]" // Blurred underline for glow
+                        initial={{ scaleX: 0, originX: 0, opacity: 0 }}
+                        whileHover={{ scaleX: 1.1, originX: 0, opacity: 1 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                      />
+                      
+                      <motion.div 
+                        className="absolute inset-0 bg-blue-500 rounded-md -z-10"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileHover={{ opacity: 0.4, scale: 1 }}
+                        transition={{ duration: 0.2 }}
+                      />
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Menu Button - Mobile */}
+              <motion.button
+                onClick={() => setIsOpen(true)}
+                className="md:hidden flex justify-center items-center w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Open menu"
+              >
+                <svg
+                  className="h-6 w-6 text-white"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+              </motion.button>
+            </div>
+          </div>
+        </motion.div>
       </motion.nav>
 
-      {/* Sidebar Menu */}
+      {/* Mobile Sidebar Menu */}
       <AnimatePresence>
         {isOpen && (
           <>
@@ -127,24 +170,24 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/30 z-50 backdrop-blur-md"
+              className="fixed inset-0 bg-black/40 z-50 backdrop-blur-sm md:hidden"
             />
 
-            {/* Updated Sidebar with narrower mobile width */}
+            {/* Mobile Sidebar */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 20 }}
-              className="fixed top-0 right-0 h-full w-4/5 sm:w-full sm:max-w-md md:max-w-xl lg:max-w-2xl bg-gradient-to-br from-blue-900 to-blue-800 z-50 border-l border-white/20"
+              className="fixed top-0 right-0 h-full w-4/5 bg-gradient-to-b from-blue-600 to-blue-800 z-50 shadow-2xl md:hidden"
             >
               {/* Close Button */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="absolute top-8 right-8 p-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors duration-300"
+                className="absolute top-6 right-6 p-2 rounded-full bg-white/20 hover:bg-white/30"
               >
                 <svg
-                  className="h-8 w-8 text-white"
+                  className="h-6 w-6 text-white"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -156,31 +199,26 @@ const Navbar = () => {
                 </svg>
               </button>
 
-              {/* Menu Items */}
-              <div className="pt-32 px-12 flex flex-col items-end">
+              {/* Menu Items for Mobile */}
+              <div className="pt-24 px-8 flex flex-col">
                 {menuItems.map((item, index) => (
                   <motion.div
                     key={item.title}
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="w-full text-right"
+                    className="mb-4"
                   >
                     <Link
                       to={item.href}
                       onClick={() => setIsOpen(false)}
-                      className="block py-6 text-4xl lg:text-5xl font-semibold text-white hover:text-blue-200 transition-colors"
+                      className="block py-4 text-xl font-medium text-white hover:text-blue-200 transition-colors border-b border-blue-500/30"
                     >
                       {item.title}
                     </Link>
                   </motion.div>
                 ))}
               </div>
-
-              {/* Decorative elements for sidebar */}
-              <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-blue-950 to-transparent pointer-events-none"></div>
-              <div className="absolute top-24 left-24 w-40 h-40 rounded-full border-2 border-white/10"></div>
-              <div className="absolute bottom-24 right-24 w-32 h-32 rounded-full border-2 border-white/10"></div>
             </motion.div>
           </>
         )}
