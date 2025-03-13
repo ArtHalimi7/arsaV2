@@ -142,6 +142,7 @@ const BeforeAfterGallery = () => {
       </div>
       
       <div className="max-w-7xl mx-auto relative z-10">
+        {/* Enhanced title with decorative elements like in HorizontalScrollSection */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -149,13 +150,71 @@ const BeforeAfterGallery = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4 relative inline-block">
-            Unsere Projektgalerie
-            <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-blue-900"></div>
-          </h2>
-          <p className="text-lg text-blue-800/70 max-w-3xl mx-auto">
+          <motion.div
+            className="inline-block relative"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <motion.h2 
+              className="text-4xl md:text-5xl font-bold text-blue-900 mb-4 relative z-10"
+            >
+              Unsere Projektgalerie
+            </motion.h2>
+            
+            {/* Adjusted animated underline - moved up, thicker, lighter color */}
+            <motion.div
+              className="absolute bottom-4 left-0 right-0 h-2 bg-blue-400/60"
+              initial={{ width: 0, left: '50%' }}
+              whileInView={{ width: '100%', left: '0%' }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+            />
+            
+            {/* Left corner decoration */}
+            <svg className="absolute -left-8 -top-8 w-16 h-16 opacity-30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20,0 V40 H60" stroke="#2563eb" strokeWidth="2" fill="none" />
+            </svg>
+            
+            {/* Right corner decoration */}
+            <svg className="absolute -right-8 -top-8 w-16 h-16 opacity-30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M80,0 V40 H40" stroke="#2563eb" strokeWidth="2" fill="none" />
+            </svg>
+            
+            {/* Left bottom corner decoration */}
+            <svg className="absolute -left-6 bottom-0 w-12 h-12 opacity-30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0,80 H40 V40" stroke="#2563eb" strokeWidth="2" fill="none" />
+            </svg>
+            
+            {/* Right bottom corner decoration */}
+            <svg className="absolute -right-6 bottom-0 w-12 h-12 opacity-30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M100,80 H60 V40" stroke="#2563eb" strokeWidth="2" fill="none" />
+            </svg>
+          </motion.div>
+          
+          <motion.p 
+            className="text-lg text-blue-800/70 max-w-3xl mx-auto mt-2"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
             Sehen Sie die Transformation unserer Projekte vor und nach der Fertigstellung
-          </p>
+          </motion.p>
+          
+          {/* Decorative element below text */}
+          <motion.div 
+            className="mt-8 opacity-30 mx-auto w-64 h-4"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 0.3, scale: 1 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+          >
+            <svg width="100%" height="100%" viewBox="0 0 200 10" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0,5 H200" stroke="#2563eb" strokeWidth="1" />
+              <path d="M50,1 V9 M100,1 V9 M150,1 V9" stroke="#2563eb" strokeWidth="1.5" />
+              <circle cx="50" cy="5" r="2" fill="#2563eb" />
+              <circle cx="100" cy="5" r="2" fill="#2563eb" />
+              <circle cx="150" cy="5" r="2" fill="#2563eb" />
+            </svg>
+          </motion.div>
         </motion.div>
 
         {/* Before/After Slider - BOTTOM SECTION */}
