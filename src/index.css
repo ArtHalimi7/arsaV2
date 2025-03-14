@@ -73,3 +73,17 @@ body {
 .grid-item:not(:nth-last-child(-n+8)) {
   border-bottom: 1px solid #333;
 }
+
+/* Prevent horizontal scroll on mobile devices only */
+@media screen and (max-width: 768px) {
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  /* Force all elements to stay within viewport width */
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+}

@@ -211,6 +211,14 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, title }) => {
 };
 
 const Services = () => {
+  // Add scroll to top effect when component mounts
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, []);
+  
   // Updated image variants - removed container staggering approach
   const imageVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.97 },

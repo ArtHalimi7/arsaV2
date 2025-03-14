@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import beforeImg from '../assets/images/before1.png';
 import afterImg from '../assets/images/after1.png';
+import { useNavigate } from 'react-router-dom';
 
 // Example project data - replace with your actual project images
 const projects = [
@@ -15,6 +16,7 @@ const projects = [
 ];
 
 const BeforeAfterGallery = () => {
+  const navigate = useNavigate();
   const [activeProject, setActiveProject] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
@@ -60,6 +62,10 @@ const BeforeAfterGallery = () => {
     const x = e.touches[0].clientX - rect.left;
     const newPosition = (x / rect.width) * 100;
     setSliderPosition(Math.min(Math.max(newPosition, 0), 100));
+  };
+
+  const handleViewMoreClick = () => {
+    navigate('/projekte');
   };
 
   return (
@@ -283,6 +289,32 @@ const BeforeAfterGallery = () => {
             </div>
           </motion.div>
         )}
+        
+        {/* Add the View More button after the slider */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex justify-center mt-10 mb-4"
+        >
+          <button 
+            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg 
+                       shadow-lg transition-all duration-300 transform hover:scale-105 
+                       flex items-center space-x-2 group border border-blue-400"
+            onClick={handleViewMoreClick}
+          >
+            <span className="font-medium text-lg">Mehr anzeigen</span>
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-5 w-5 transform group-hover:translate-x-1 transition-transform duration-300" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+        </motion.div>
       </div>
     </div>
   );

@@ -73,6 +73,14 @@ const ContactForm = () => {
     }
   ];
 
+  // Add scroll to top effect when component mounts
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, []);
+  
   // Initialize EmailJS
   useEffect(() => {
     emailjs.init("-NWp731-hJ2KBhmcB"); // Replace with your public key
