@@ -13,15 +13,19 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
   
   const { scrollY } = useScroll();
   
-  // Use Framer Motion's useMotionValueEvent to detect scroll direction
+  // Use Framer Motion's useMotionValueEvent to detect scroll direction and position
   useMotionValueEvent(scrollY, "change", (latest) => {
     // Check if we're scrolling up or down
     const currentScrollY = latest;
     const scrollingDown = currentScrollY > lastScrollY;
     const scrollDifference = Math.abs(currentScrollY - lastScrollY);
+    
+    // Set scrolled state for background transparency effect
+    setIsScrolled(currentScrollY > 50);
     
     // Only trigger hide/show when scroll amount is significant
     if (scrollDifference > 10) {
@@ -43,22 +47,41 @@ const Navbar = () => {
         }}
       >
         <motion.div 
-          className="w-full bg-gradient-to-r from-blue-700 to-blue-900 shadow-lg backdrop-blur-sm relative overflow-hidden"
-          initial={{ height: '100px' }}  // Increased height
-          animate={{ height: '100px' }}  // Increased height
+          className="w-full shadow-lg backdrop-blur-sm relative overflow-hidden"
+          initial={{ 
+            height: '100px',
+            backgroundColor: 'rgba(30, 64, 175, 0)' // Initially transparent
+          }}
+          animate={{ 
+            height: '100px',
+            backgroundColor: isScrolled ? 'rgba(30, 64, 175, 0.95)' : 'rgba(30, 64, 175, 0)',
+            boxShadow: isScrolled ? '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' : 'none'
+          }}
+          transition={{ duration: 0.3 }}
+          style={{
+            borderBottom: !isScrolled ? '1px solid rgba(255, 255, 255, 0.3)' : 'none'
+          }}
         >
-          {/* Blueprint texture overlay */}
-          <div className="absolute inset-0 opacity-10">
+          {/* Blueprint texture overlay - visible only when scrolled */}
+          <motion.div 
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isScrolled ? 0.1 : 0 }}
+          >
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
               <pattern id="blueprint-grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
                 <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#ffffff" strokeWidth="0.5"/>
               </pattern>
               <rect width="100%" height="100%" fill="url(#blueprint-grid)" />
             </svg>
-          </div>
+          </motion.div>
           
-          {/* Larger blueprint elements */}
-          <div className="absolute inset-0 opacity-5">
+          {/* Larger blueprint elements - visible only when scrolled */}
+          <motion.div 
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isScrolled ? 0.05 : 0 }}
+          >
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
               <pattern id="blueprint-large" x="0" y="0" width="100" height="80" patternUnits="userSpaceOnUse">
                 <circle cx="20" cy="40" r="2" fill="none" stroke="#ffffff" strokeWidth="0.5"/>
@@ -68,7 +91,15 @@ const Navbar = () => {
               </pattern>
               <rect width="100%" height="100%" fill="url(#blueprint-large)" />
             </svg>
-          </div>
+          </motion.div>
+          
+          {/* Bottom border line - only visible when transparent */}
+          <motion.div 
+            className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-white/0 via-white/30 to-white/0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isScrolled ? 0 : 1 }}
+            transition={{ duration: 0.3 }}
+          />
           
           <div className="max-w-full mx-auto px-6 lg:px-12 h-full relative z-10">
             <div className="flex items-center justify-between h-full">
@@ -104,7 +135,7 @@ const Navbar = () => {
                       to={item.href}
                       className="text-white text-2xl font-medium relative group overflow-hidden" // Increased font size
                     >
-                      <span className="relative z-10">{item.title}</span>
+                      <span className="relative z-10 drop-shadow-lg">{item.title}</span>
                       
                       {/* Primary animated underline */}
                       <motion.div
