@@ -133,13 +133,13 @@ const Navbar = () => {
                   >
                     <Link
                       to={item.href}
-                      className="text-white text-2xl font-medium relative group overflow-hidden" // Increased font size
+                      className={`${!isScrolled ? 'text-blue-900' : 'text-white'} text-2xl font-medium relative group overflow-hidden`} // Conditional text color
                     >
                       <span className="relative z-10 drop-shadow-lg">{item.title}</span>
                       
                       {/* Primary animated underline */}
                       <motion.div
-                        className="absolute bottom-0 left-0 w-full h-[4px] bg-white shadow-glow" // Thicker underline with glow
+                        className={`absolute bottom-0 left-0 w-full h-[4px] ${!isScrolled ? 'bg-blue-900' : 'bg-white'} shadow-glow`} // Conditional underline color
                         initial={{ scaleX: 0, originX: 0 }}
                         whileHover={{ scaleX: 1, originX: 0 }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -147,14 +147,14 @@ const Navbar = () => {
                       
                       {/* Secondary animated underline for glow effect */}
                       <motion.div
-                        className="absolute bottom-0 left-0 w-full h-[2px] bg-white/60 blur-[1px]" // Blurred underline for glow
+                        className={`absolute bottom-0 left-0 w-full h-[2px] ${!isScrolled ? 'bg-blue-900/60' : 'bg-white/60'} blur-[1px]`} // Conditional underline glow color
                         initial={{ scaleX: 0, originX: 0, opacity: 0 }}
                         whileHover={{ scaleX: 1.1, originX: 0, opacity: 1 }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
                       />
                       
                       <motion.div 
-                        className="absolute inset-0 bg-blue-500 rounded-md -z-10"
+                        className={`absolute inset-0 ${!isScrolled ? 'bg-white/50' : 'bg-blue-500'} rounded-md -z-10`} // Conditional hover background
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileHover={{ opacity: 0.4, scale: 1 }}
                         transition={{ duration: 0.2 }}

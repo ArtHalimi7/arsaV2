@@ -9,15 +9,21 @@ import {
   ArrowRightIcon,
   ClockIcon,
   MapPinIcon,
-  BuildingOfficeIcon
+  BuildingOfficeIcon,
+  ExclamationCircleIcon
 } from '@heroicons/react/24/outline';
 
 const ContactForm = () => {
-  // Existing code remains the same
   const form = useRef();
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState({ show: false, success: false, message: '' });
   const [formData, setFormData] = useState({
+    from_name: '',
+    from_email: '',
+    phone: '',
+    message: ''
+  });
+  const [errors, setErrors] = useState({
     from_name: '',
     from_email: '',
     phone: '',
@@ -37,8 +43,53 @@ const ContactForm = () => {
     emailjs.init("-NWp731-hJ2KBhmcB");
   }, []);
 
+  // Validate form fields
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {
+      from_name: '',
+      from_email: '',
+      phone: '',
+      message: ''
+    };
+
+    // Validate name
+    if (formData.from_name.trim().length < 2) {
+      newErrors.from_name = 'Name muss mindestens 2 Zeichen lang sein';
+      isValid = false;
+    }
+
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.from_email)) {
+      newErrors.from_email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+      isValid = false;
+    }
+
+    // Validate phone (optional)
+    if (formData.phone && !/^[+\d\s()-]{6,20}$/.test(formData.phone)) {
+      newErrors.phone = 'Bitte geben Sie eine gültige Telefonnummer ein';
+      isValid = false;
+    }
+
+    // Validate message
+    if (formData.message.trim().length < 10) {
+      newErrors.message = 'Nachricht muss mindestens 10 Zeichen lang sein';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate form before submission
+    if (!validateForm()) {
+      return;
+    }
+    
     setLoading(true);
     setStatus({ show: false, success: false, message: '' });
 
@@ -85,7 +136,44 @@ const ContactForm = () => {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    
+    // Clear error when user types
+    if (errors[name]) {
+      setErrors({...errors, [name]: ''});
+    }
+  };
+
+  // Add field-specific blur validation for immediate feedback
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    
+    switch(name) {
+      case 'from_name':
+        if (formData.from_name.trim().length < 2) {
+          setErrors({...errors, from_name: 'Name muss mindestens 2 Zeichen lang sein'});
+        }
+        break;
+      case 'from_email':
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.from_email)) {
+          setErrors({...errors, from_email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein'});
+        }
+        break;
+      case 'phone':
+        if (formData.phone && !/^[+\d\s()-]{6,20}$/.test(formData.phone)) {
+          setErrors({...errors, phone: 'Bitte geben Sie eine gültige Telefonnummer ein'});
+        }
+        break;
+      case 'message':
+        if (formData.message.trim().length < 10) {
+          setErrors({...errors, message: 'Nachricht muss mindestens 10 Zeichen lang sein'});
+        }
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -390,13 +478,29 @@ const ContactForm = () => {
                           name="from_name"
                           value={formData.from_name}
                           onChange={handleChange}
+                          onBlur={handleBlur}
                           required
-                          className="w-full bg-white/90 backdrop-blur-sm border border-blue-200 rounded-lg pl-12 pr-4 py-3 text-blue-900 placeholder-blue-400/70 focus:outline-none focus:ring-2 focus:ring-blue-400/60 transition-all duration-300 group-hover:border-blue-400"
+                          className={`w-full bg-white/90 backdrop-blur-sm border rounded-lg pl-12 pr-4 py-3 text-blue-900 placeholder-blue-400/70 focus:outline-none focus:ring-2 transition-all duration-300 group-hover:border-blue-400
+                            ${errors.from_name ? 'border-red-300 focus:ring-red-400/60' : 'border-blue-200 focus:ring-blue-400/60'}`}
                           placeholder="Ihr Name"
                         />
+                        {/* Error icon */}
+                        {errors.from_name && (
+                          <ExclamationCircleIcon className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-red-500" />
+                        )}
                         {/* Decorative glow effect */}
                         <div className="absolute inset-0 -z-10 bg-blue-400/10 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </motion.div>
+                      {/* Error message */}
+                      {errors.from_name && (
+                        <motion.p 
+                          initial={{ opacity: 0, y: -5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="mt-1 text-sm text-red-500"
+                        >
+                          {errors.from_name}
+                        </motion.p>
+                      )}
                       <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-blue-300"></div>
                       <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-blue-300"></div>
                       <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-blue-300"></div>
@@ -418,11 +522,27 @@ const ContactForm = () => {
                           name="from_email"
                           value={formData.from_email}
                           onChange={handleChange}
+                          onBlur={handleBlur}
                           required
-                          className="w-full bg-white/90 backdrop-blur-sm border border-blue-200 rounded-lg pl-12 pr-4 py-3 text-blue-900 placeholder-blue-400/70 focus:outline-none focus:ring-2 focus:ring-blue-400/60"
+                          className={`w-full bg-white/90 backdrop-blur-sm border rounded-lg pl-12 pr-4 py-3 text-blue-900 placeholder-blue-400/70 focus:outline-none focus:ring-2 transition-all duration-300
+                            ${errors.from_email ? 'border-red-300 focus:ring-red-400/60' : 'border-blue-200 focus:ring-blue-400/60'}`}
                           placeholder="Ihre E-Mail"
                         />
+                        {/* Error icon */}
+                        {errors.from_email && (
+                          <ExclamationCircleIcon className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-red-500" />
+                        )}
                       </div>
+                      {/* Error message */}
+                      {errors.from_email && (
+                        <motion.p 
+                          initial={{ opacity: 0, y: -5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="mt-1 text-sm text-red-500"
+                        >
+                          {errors.from_email}
+                        </motion.p>
+                      )}
                       <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-blue-300"></div>
                       <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-blue-300"></div>
                       <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-blue-300"></div>
@@ -444,10 +564,26 @@ const ContactForm = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full bg-white/90 backdrop-blur-sm border border-blue-200 rounded-lg pl-12 pr-4 py-3 text-blue-900 placeholder-blue-400/70 focus:outline-none focus:ring-2 focus:ring-blue-400/60"
+                          onBlur={handleBlur}
+                          className={`w-full bg-white/90 backdrop-blur-sm border rounded-lg pl-12 pr-4 py-3 text-blue-900 placeholder-blue-400/70 focus:outline-none focus:ring-2 transition-all duration-300
+                            ${errors.phone ? 'border-red-300 focus:ring-red-400/60' : 'border-blue-200 focus:ring-blue-400/60'}`}
                           placeholder="Ihre Telefonnummer (optional)"
                         />
+                        {/* Error icon */}
+                        {errors.phone && (
+                          <ExclamationCircleIcon className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-red-500" />
+                        )}
                       </div>
+                      {/* Error message */}
+                      {errors.phone && (
+                        <motion.p 
+                          initial={{ opacity: 0, y: -5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="mt-1 text-sm text-red-500"
+                        >
+                          {errors.phone}
+                        </motion.p>
+                      )}
                       <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-blue-300"></div>
                       <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-blue-300"></div>
                       <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-blue-300"></div>
@@ -468,12 +604,28 @@ const ContactForm = () => {
                           name="message"
                           value={formData.message}
                           onChange={handleChange}
+                          onBlur={handleBlur}
                           required
                           rows="4"
-                          className="w-full bg-white/90 backdrop-blur-sm border border-blue-200 rounded-lg pl-12 pr-4 py-3 text-blue-900 placeholder-blue-400/70 focus:outline-none focus:ring-2 focus:ring-blue-400/60 resize-none"
+                          className={`w-full bg-white/90 backdrop-blur-sm border rounded-lg pl-12 pr-4 py-3 text-blue-900 placeholder-blue-400/70 focus:outline-none focus:ring-2 resize-none transition-all duration-300
+                            ${errors.message ? 'border-red-300 focus:ring-red-400/60' : 'border-blue-200 focus:ring-blue-400/60'}`}
                           placeholder="Ihre Nachricht"
                         ></textarea>
+                        {/* Error icon */}
+                        {errors.message && (
+                          <ExclamationCircleIcon className="absolute right-4 top-4 w-5 h-5 text-red-500" />
+                        )}
                       </div>
+                      {/* Error message */}
+                      {errors.message && (
+                        <motion.p 
+                          initial={{ opacity: 0, y: -5 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="mt-1 text-sm text-red-500"
+                        >
+                          {errors.message}
+                        </motion.p>
+                      )}
                       <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-blue-300"></div>
                       <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-blue-300"></div>
                       <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-blue-300"></div>
@@ -481,20 +633,23 @@ const ContactForm = () => {
                     </motion.div>
                   </div>
 
-                  {/* Status and button container - unchanged */}
+                  {/* Status and button container */}
                   <div className="space-y-4 mt-auto">
                     {/* Status Message */}
-                    {status.show && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className={`text-center p-3 rounded-lg ${
-                          status.success ? 'bg-green-100 text-green-800 border border-green-200' : 'bg-red-100 text-red-800 border border-red-200'
-                        }`}
-                      >
-                        {status.message}
-                      </motion.div>
-                    )}
+                    <AnimatePresence>
+                      {status.show && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          className={`text-center p-3 rounded-lg ${
+                            status.success ? 'bg-green-100 text-green-800 border border-green-200' : 'bg-red-100 text-red-800 border border-red-200'
+                          }`}
+                        >
+                          {status.message}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
                     {/* Submit Button */}
                     <motion.div
@@ -547,47 +702,11 @@ const ContactForm = () => {
                   </div>
                 </form>
                 
-                {/* Add the circle decoration from About page */}
+                {/* Circle decoration */}
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-500/10 rounded-xl z-0"></div>
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
-      
-      {/* Redesigned Location component integrated directly */}
-      <section className="relative w-full bg-gradient-to-b from-blue-100 to-white mt-[-100px]">
-        {/* Decorative background */}
-        <div className="absolute inset-0 pointer-events-none opacity-5">
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <pattern id="smallgrid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e40af" strokeWidth="0.5"/>
-            </pattern>
-            <rect width="100%" height="100%" fill="url(#smallgrid)" />
-          </svg>
-        </div>
-        
-        {/* Add glowing orbs */}
-        <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-blue-200/20 blur-3xl z-0"></div>
-        <div className="absolute bottom-20 right-10 w-60 h-60 rounded-full bg-blue-100/30 blur-3xl z-0"></div>
-        
-        <div className="mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="relative overflow-hidden rounded-xl shadow-lg"
-          >
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2429.569013048835!2d13.38885931580492!3d52.51703617981244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a851e3b0e6b1b1%3A0x4e9b9b9b9b9b9b9b!2sBrandenburger%20Tor!5e0!3m2!1sen!2sde!4v1634567890123!5m2!1sen!2sde"
-              width="100%"
-              height="450"
-              allowFullScreen=""
-              loading="lazy"
-              className="border-0"
-            ></iframe>
-          </motion.div>
         </div>
       </section>
     </>

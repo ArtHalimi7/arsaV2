@@ -1,270 +1,86 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import header4 from '../assets/images/header4.jpg';
-
-const words = [
-  "Trockenbau",
-  "Gipsarbeiten",
-  "Akustikdecken",
-  "Brandschutz"
-];
 
 const Hero = () => {
-  const [currentWord, setCurrentWord] = useState(0);
-  const [isButtonHovered, setIsButtonHovered] = useState(false);
-
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const ctaRef = useRef(null);
+  
   useEffect(() => {
-    // Word flip animation timer
-    const interval = setInterval(() => {
-      setCurrentWord((prev) => (prev + 1) % words.length);
-    }, 2000);
-
-    return () => clearInterval(interval);
+    // Add animation classes after component mounts
+    setTimeout(() => {
+      titleRef.current.classList.add('opacity-100', 'translate-y-0');
+      subtitleRef.current.classList.add('opacity-100', 'translate-y-0');
+      ctaRef.current.classList.add('opacity-100', 'translate-y-0');
+    }, 100);
   }, []);
 
+  const handleCallClick = () => {
+    window.location.href = 'tel:+4912345678';
+  };
+
   return (
-    <>
-      <div className="relative" style={{ overflow: 'hidden' }}>
-        <div className="relative">
-          <img 
-            src={header4} 
-            alt="ARSA Gipser" 
-            className="w-full h-auto object-cover slider-image img-fade-in-up" 
+    <div className="relative h-[80vh] w-full overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center brightness-[0.8]"
+          style={{ 
+            backgroundImage: "url('https://www.whitevoid.com/wordpress/wp-content/uploads/2019/02/16-9-Flare-Facade-WHITEvoid-01-1920x1080.jpg')" 
+          }}
+        />
+        {/* Right-side curved gradient overlay */}
+        <div className="absolute inset-0">
+          <div 
+            className="absolute right-0 top-0 bottom-0 w-[75%] overflow-hidden"
+            style={{
+              background: 'linear-gradient(360deg, rgba(30, 64, 175, 0.2) 50%, rgba(37, 99, 235, 0.05)), transparent',
+              borderTopLeftRadius: '0%',
+              borderBottomLeftRadius: '100%'
+            }}
           />
-          <div className="text-container">
-            <div className="animated-title">
-              <h1 className="title-static">Qualität in</h1>
-              <div className="word-container">
-                <AnimatePresence mode='wait'>
-                  <motion.span
-                    key={currentWord}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -30 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="title-dynamic"
-                  >
-                    {words[currentWord]}
-                  </motion.span>
-                </AnimatePresence>
-              </div>
-            </div>
-            
-            <motion.div
-              className="button-container"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-            >
-              <Link to="/kontakt">
-                <motion.button 
-                  className="image-button"
-                  onMouseEnter={() => setIsButtonHovered(true)}
-                  onMouseLeave={() => setIsButtonHovered(false)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span>Kontakt</span>
-                  <motion.span 
-                    className="button-arrow"
-                    animate={{ x: isButtonHovered ? 5 : 0 }}
-                    transition={{ duration: 0.2 }}
-                  >→</motion.span>
-                </motion.button>
-              </Link>
-            </motion.div>
-          </div>
         </div>
       </div>
-
-      <style jsx global>{`
-        body {
-          margin: 0;
-          padding: 0;
-          overflow-x: hidden; /* Prevent horizontal scrolling */
-        }
-      `}</style>
-
-      <style jsx>{`
-        .slider-image {
-          height: 80vh;
-          animation: fadeInOut 1s ease-in-out;
-          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .text-container {
-          position: absolute;
-          top: 50%;
-          left: 150px;
-          transform: translateY(-50%);
-          text-align: left;
-          z-index: 1;
-        }
+      
+      {/* Content */}
+      <div className="relative z-10 h-full max-w-[1400px] mx-auto px-8 flex flex-col justify-center">
+        <h1 
+          ref={titleRef}
+          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5 leading-tight tracking-tight opacity-0 translate-y-8 transition-all duration-1000"
+        >
+          Präzision und <span className="text-blue-300">Eleganz</span> in jedem Detail
+        </h1>
         
-        .button-container {
-          margin-top: 40px;
-        }
+        <p 
+          ref={subtitleRef}
+          className="text-lg md:text-xl font-light text-white/90 max-w-xl mb-8 opacity-0 translate-y-8 transition-all duration-1000 delay-200"
+        >
+          ARSA liefert erstklassige Gipser- und Trockenbaulösungen für moderne Wohn- und Geschäftsräume.
+        </p>
         
-        .image-button {
-          width: 200px;
-          height: 60px;
-          background-color: #3074e4;
-          color: white;
-          padding: 12px 24px;
-          border: none;
-          border-radius: 8px;
-          font-size: 18px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          box-shadow: 0 4px 14px rgba(48, 116, 228, 0.4);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .image-button:hover {
-          background-color: #1d5ac3;
-          box-shadow: 0 6px 20px rgba(48, 116, 228, 0.6);
-        }
-        
-        .image-button::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
-          transition: left 0.7s ease;
-        }
-        
-        .image-button:hover::after {
-          left: 100%;
-        }
-
-        .button-arrow {
-          font-size: 20px;
-          display: inline-block;
-        }
-
-        .animated-title {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 10px;
-          position: relative;
-          z-index: 2;
-        }
-
-        .title-static {
-          font-size: 72px;
-          color: white;
-          margin: 0;
-          font-weight: bold;
-          text-shadow: 
-            -1px -1px 0 #3074e4,
-            1px -1px 0 #3074e4,
-            -1px 1px 0 #3074e4,
-            1px 1px 0 #3074e4;
-        }
-
-        .title-dynamic {
-          font-size: 80px;
-          color: #3074e4;
-          font-weight: bold;
-          display: block;
-          white-space: nowrap;
-          text-shadow:
-            -1px -1px 0 white,
-            1px -1px 0 white,
-            -1px 1px 0 white,
-            1px 1px 0 white;
-        }
-
-        .word-container {
-          height: 90px;
-          position: relative;
-          display: flex;
-          align-items: center;
-          overflow: hidden;
-        }
-
-        @media (max-width: 767px) {
-          .slider-image {
-            height: 100vh;
-            object-position: center;
-          }
-
-          .text-container {
-            top: 30%;
-            left: 20px;
-            width: 90%;
-          }
+        <div 
+          ref={ctaRef}
+          className="flex flex-col sm:flex-row gap-4 opacity-0 translate-y-8 transition-all duration-1000 delay-400"
+        >
+          <button 
+            onClick={handleCallClick}
+            className="px-6 py-3 text-base font-semibold bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 hover:-translate-y-1 transition-all duration-300"
+          >
+            Kontakt aufnehmen
+          </button>
           
-          .animated-title {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 8px;
-          }
-          
-          .title-static, .title-dynamic {
-            font-size: 40px;
-          }
-          
-          .title-dynamic {
-            font-size: 48px;
-          }
-          
-          .word-container {
-            height: 50px;
-          }
-          
-          .button-container {
-            margin-top: 30px;
-          }
-          
-          .image-button {
-            width: 180px;
-            height: 50px;
-            font-size: 16px;
-            padding: 10px 20px;
-          }
-        }
-
-        @keyframes fadeInOut {
-          0% {
-            opacity: 0.3;
-          }
-          50% {
-            opacity: 1;
-          }
-          100% {
-            opacity: 0.3;
-          }
-        }
-
-        .img-fade-in-up {
-          opacity: 0;
-          animation: fadeInUp 0.5s forwards;
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translate3d(0, 20px, 0);
-          }
-          to {
-            opacity: 1;
-            transform: none;
-          }
-        }
-      `}</style>
-    </>
+          <Link to="/projekte" className="px-6 py-3 text-base font-semibold bg-transparent text-white border-2 border-white/70 rounded hover:bg-white/10 transition-all duration-300 text-center">
+            Unsere Projekte
+          </Link>
+        </div>
+      </div>
+      
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-white/70 hover:text-white/100 transition-opacity duration-300">
+        <span className="text-sm">Mehr entdecken</span>
+        <div className="mt-2 animate-bounce">↓</div>
+      </div>
+    </div>
   );
 };
 

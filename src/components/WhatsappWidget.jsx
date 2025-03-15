@@ -3,15 +3,24 @@ import ReactWhatsapp from 'react-whatsapp';
 import logo from '../assets/images/logo.png';
 
 const WhatsappWidget = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [dots, setDots] = useState('');
   const [inputMessage, setInputMessage] = useState('');
   const [showMessage, setShowMessage] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  // Track window size for responsive behavior
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Typing effect when opening the widget
   useEffect(() => {
     let typingTimeout;
-    if (isHovered && !showMessage) {
+    if (isOpen && !showMessage) {
       setIsTyping(true);
       typingTimeout = setTimeout(() => {
         setIsTyping(false);
@@ -19,8 +28,9 @@ const WhatsappWidget = () => {
       }, 2000); // Show typing for 2 seconds
     }
     return () => clearTimeout(typingTimeout);
-  }, [isHovered]);
+  }, [isOpen]);
 
+  // Dots animation
   useEffect(() => {
     let interval;
     if (isTyping) {
@@ -30,6 +40,23 @@ const WhatsappWidget = () => {
     }
     return () => clearInterval(interval);
   }, [isTyping]);
+
+  // Close widget when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpen && !event.target.closest('.whatsapp-widget-container')) {
+        setIsOpen(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
+
+  // Calculate responsive dimensions
+  const isMobile = windowWidth <= 768;
+  const widgetWidth = isMobile ? '300px' : '350px';
+  const widgetHeight = isMobile ? '400px' : '450px';
 
   return (
     <div 
@@ -42,23 +69,27 @@ const WhatsappWidget = () => {
         alignItems: 'flex-end',
         gap: '10px'
       }}
+      className="whatsapp-widget-container"
     >
-      {isHovered && (
+      {isOpen && (
         <div style={{
           backgroundColor: '#fff',
           borderRadius: '12px',
           boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-          width: '300px',
+          width: widgetWidth,
+          maxWidth: '90vw',
           overflow: 'hidden',
           transform: 'scale(1)',
           transition: 'all 0.2s ease-in-out',
           display: 'flex',
           flexDirection: 'column',
-          height: '400px',
+          height: widgetHeight,
+          maxHeight: '80vh',
+          marginBottom: isMobile ? '60px' : '0',
         }}>
           {/* WhatsApp Header */}
           <div style={{
-            backgroundColor: '#128c7e',
+            backgroundColor: '#075e54',
             padding: '12px',
             color: 'white',
           }}>
@@ -67,19 +98,34 @@ const WhatsappWidget = () => {
               alignItems: 'center',
               gap: '8px',
             }}>
-              <img 
-                src={logo} 
-                alt="Arsa Logo" 
-                style={{ 
-                  width: '40px', 
-                  height: '30px', 
-                }} 
-              />
+              <div style={{
+                backgroundColor: '#fff',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+                <img 
+                  src={logo} 
+                  alt="Arsa Logo" 
+                  style={{ 
+                    width: '32px', 
+                    height: '24px', 
+                  }} 
+                />
+              </div>
               <div>
                 <div style={{ fontWeight: '600', fontSize: '16px' }}>Arsa Gipser</div>
                 <div style={{ fontSize: '12px', opacity: 0.8 }}>
                   {isTyping ? 'schreibt' + dots : 'Online'}
                 </div>
+              </div>
+              <div style={{ marginLeft: 'auto', cursor: 'pointer' }} onClick={() => setIsOpen(false)}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                </svg>
               </div>
             </div>
           </div>
@@ -87,7 +133,7 @@ const WhatsappWidget = () => {
           {/* Chat Area */}
           <div style={{
             padding: '12px',
-            backgroundImage: `url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAG1BMVEVHcEzx8fHw8PDw8PDw8PDw8PDw8PDw8PDw8PDJRRl3AAAACHRSTlMAGhgwLS8/Ozr7LZAAAABsSURBVDjLY2AYBQM+DPF/gIT8Hwx+MPAOGD6A0v+HgQ8FBD4wMHyA0v+cgfE/A8MHmHwDWOoDWOoDrB4m/wEs/wEm/wEm/wEs/wEmD1L/Aaz+A0z9B7D6DzD1H8Dq0eVh9gP1g+2H+wdqPwwAALJWvPypxXIqAAAAAElFTkSuQmCC")`,
+            backgroundImage: `url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAG1BMVEVHcEzx8fHw8PDw8PDw8PDw8PDw8PDw8PDw8PDJRRl3AAAACHRSTlMAGhgwLS8/Ozr7LZAAAABsSURBVDjLY2AYBQM+DPF/gIT8Hwx+MPAOGD6A0v+HgQ8FBD4wMHyA0v+cgfE/A8MHmHwDWOoDWOoDrB4m/wEs/wEm/wEmD1L/Aaz+A0z9B7D6DzD1H8Dq0eVh9gP1g+2H+wdqPwwAALJWvPypxXIqAAAAAElFTkSuQmCC")`,
             backgroundColor: '#efeae2', // WhatsApp chat background color
             flex: 1,
             display: 'flex',
@@ -222,32 +268,49 @@ const WhatsappWidget = () => {
         </div>
       )}
 
-      <ReactWhatsapp 
-        number="+1234567890"
-        message="Hallo! Ich interessiere mich für Ihre Dienstleistungen."
-        element="button"
+      <button
+        onClick={() => setIsOpen(!isOpen)}
         style={{
           backgroundColor: '#25D366', // Lighter WhatsApp green
           border: 'none',
           borderRadius: '50%',
-          padding: '16px',
+          padding: isMobile ? '12px' : '16px',
           cursor: 'pointer',
           boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           transition: 'transform 0.2s ease',
-          transform: isHovered ? 'scale(1.1)' : 'scale(1)'
+          transform: isOpen ? 'scale(1.1)' : 'scale(1)',
+          width: isMobile ? '50px' : '60px',
+          height: isMobile ? '50px' : '60px',
+          position: 'relative',
         }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
       >
         <img 
           src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
           alt="WhatsApp"
-          style={{ width: '32px', height: '32px' }}
+          style={{ 
+            width: isMobile ? '26px' : '32px', 
+            height: isMobile ? '26px' : '32px' 
+          }}
         />
-      </ReactWhatsapp>
+        {!isOpen && <span style={{
+          position: 'absolute',
+          top: '-5px',
+          right: '-5px',
+          backgroundColor: 'red',
+          color: 'white',
+          borderRadius: '50%',
+          width: '20px',
+          height: '20px',
+          fontSize: '12px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontWeight: 'bold'
+        }}>1</span>}
+      </button>
     </div>
   );
 };
@@ -257,6 +320,13 @@ const styles = `
   @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
+  }
+  
+  @media (max-width: 768px) {
+    .whatsapp-widget-container {
+      bottom: 10px !important;
+      right: 10px !important;
+    }
   }
 `;
 

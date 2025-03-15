@@ -174,7 +174,7 @@ const HorizontalScrollSection = () => {
 // Mobile-specific component with proper height and spacing
 const MobileServicesSection = ({ services, activeIndex, contentVariants, cardVariants }) => {
   return (
-    <section className="relative h-[210vh] bg-gradient-to-b from-blue-800 via-blue-900 to-blue-950">
+    <section className="relative h-[250vh] bg-gradient-to-b from-blue-800 via-blue-900 to-blue-950">
       {/* Blueprint pattern background */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">

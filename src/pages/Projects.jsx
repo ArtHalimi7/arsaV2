@@ -144,7 +144,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, title }) => {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       viewport={{ once: false, margin: "-100px" }}
-      className="relative rounded-2xl overflow-hidden border-2 border-blue-100 shadow-xl mt-16 mb-16 max-w-7xl mx-auto"
+      className="relative overflow-hidden shadow-xl mt-16 mb-16 max-w-5xl mx-auto" // Changed from max-w-7xl to max-w-5xl
     >
       {title && (
         <div className="absolute top-16 left-1/2 -translate-x-1/2 z-50 bg-white/80 backdrop-blur-sm py-2 px-6 rounded-full shadow-lg">
@@ -153,7 +153,7 @@ const BeforeAfterSlider = ({ beforeImage, afterImage, title }) => {
       )}
       <div 
         ref={containerRef}
-        className="relative h-[80vh] select-none" 
+        className="relative h-[70vh] select-none"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}

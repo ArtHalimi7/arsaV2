@@ -234,7 +234,7 @@ const BeforeAfterGallery = () => {
           >
             <div 
               ref={containerRef}
-              className="relative h-[80vh] select-none" 
+              className="relative h-[70vh] select-none" 
               onMouseDown={handleMouseDown}
               onMouseUp={handleMouseUp}
               onMouseMove={handleMouseMove}

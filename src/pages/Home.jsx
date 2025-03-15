@@ -5,6 +5,7 @@ import HorizontalScrollSection from '../components/HorizontalScrollSection';
 import BeforeAfterGallery from '../components/BeforeAfterGallery';
 import Location from '../components/Location';
 import Footer from '../components/Footer';
+import Testimonials from '../components/Testimonials';
 
 const Home = () => {
   // Add scroll to top effect when component mounts
@@ -21,6 +22,7 @@ const Home = () => {
       <AnimatedTextSection />
       <BeforeAfterGallery/>
       <HorizontalScrollSection />
+      <Testimonials/>
       <Location />
       <Footer/>
     </>

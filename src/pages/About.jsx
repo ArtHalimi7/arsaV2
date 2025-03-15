@@ -208,7 +208,7 @@ const About = () => {
         </div>
         
         {/* Experience Stats Section - White Background with Blue Text */}
-        <section className="relative h-[50vh] w-full bg-transparent overflow-hidden">
+        <section className="relative hidden md:block h-[50vh] w-full bg-transparent overflow-hidden">
           {/* Make sure we go full width by removing any container constraints */}
           <div className="absolute inset-0">
             {/* Large Background Text */}
@@ -255,7 +255,7 @@ const About = () => {
               </motion.div>
 
               {/* Grid with count-up animation for numbers - Centered Text */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto px-4 mt-[190px]">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-6xl mx-auto px-4 mt-[100px] md:mt-[190px]">
                 {experienceData.map((item, index) => (
                   <motion.div 
                     key={index}
@@ -263,7 +263,7 @@ const About = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: false, margin: "-100px" }}
-                    className="text-center flex flex-col items-center justify-center"
+                    className="text-center flex flex-col items-center justify-center p-3 md:p-4"
                   >
                     <motion.div
                       initial={{ scale: 0.9, opacity: 0 }}
@@ -274,10 +274,10 @@ const About = () => {
                         ease: [0.34, 1.56, 0.64, 1] // Spring-like animation
                       }}
                       viewport={{ once: false, margin: "-100px" }}
-                      className="mb-2 text-center"
+                      className="mb-1 md:mb-2 text-center"
                     >
                       <motion.p
-                        className="text-5xl md:text-6xl font-bold text-blue-600 inline-block"
+                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-blue-600 inline-block"
                         initial={{ opacity: 0.3 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ 
@@ -288,14 +288,14 @@ const About = () => {
                         {item.number}
                       </motion.p>
                     </motion.div>
-                    <p className="text-lg text-blue-800/80 font-medium">{item.text}</p>
+                    <p className="text-base md:text-lg text-blue-800/80 font-medium">{item.text}</p>
                   </motion.div>
                 ))}
               </div>
             </div>
           </div>
         </section>
-        
+
         {/* Meet the Team Section - Redesigned */}
         <motion.div 
           initial={{ opacity: 0 }}
