@@ -11,7 +11,7 @@ const openingHours = [
 const quickLinks = [
   { name: 'Home', href: '/' },
   { name: 'Über Uns', href: '/about' },
-  { name: 'Leistungen', href: '/services' },
+  { name: 'Projekte', href: '/projekte' },
   { name: 'Kontakt', href: '/kontakt' },
 ];
 

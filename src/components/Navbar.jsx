@@ -62,11 +62,11 @@ const Navbar = () => {
             borderBottom: !isScrolled ? '1px solid rgba(255, 255, 255, 0.3)' : 'none'
           }}
         >
-          {/* Blueprint texture overlay - visible only when scrolled */}
+          {/* Blueprint texture overlay - visible only when scrolled - with reduced opacity */}
           <motion.div 
             className="absolute inset-0"
             initial={{ opacity: 0 }}
-            animate={{ opacity: isScrolled ? 0.1 : 0 }}
+            animate={{ opacity: isScrolled ? 0.05 : 0 }}  // Reduced from 0.1 to 0.05
           >
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
               <pattern id="blueprint-grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -76,11 +76,11 @@ const Navbar = () => {
             </svg>
           </motion.div>
           
-          {/* Larger blueprint elements - visible only when scrolled */}
+          {/* Larger blueprint elements - visible only when scrolled - with reduced opacity */}
           <motion.div 
             className="absolute inset-0"
             initial={{ opacity: 0 }}
-            animate={{ opacity: isScrolled ? 0.05 : 0 }}
+            animate={{ opacity: isScrolled ? 0.03 : 0 }}  // Reduced from 0.05 to 0.03
           >
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
               <pattern id="blueprint-large" x="0" y="0" width="100" height="80" patternUnits="userSpaceOnUse">
@@ -167,13 +167,15 @@ const Navbar = () => {
               {/* Menu Button - Mobile */}
               <motion.button
                 onClick={() => setIsOpen(true)}
-                className="md:hidden flex justify-center items-center w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm"
+                className={`md:hidden flex justify-center items-center w-12 h-12 rounded-full ${
+                  isScrolled ? 'bg-white/20 hover:bg-white/30' : 'bg-blue-900/20 hover:bg-blue-900/30'
+                } backdrop-blur-sm`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label="Open menu"
               >
                 <svg
-                  className="h-6 w-6 text-white"
+                  className={`h-6 w-6 ${isScrolled ? 'text-white' : 'text-blue-900'}`}
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
