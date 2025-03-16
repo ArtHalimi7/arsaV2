@@ -210,7 +210,7 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 20 }}
-              className="fixed top-0 right-0 h-full w-4/5 bg-gradient-to-b from-blue-600 to-blue-800 z-50 shadow-2xl md:hidden"
+              className="fixed top-0 right-0 h-full w-3/6 bg-gradient-to-b from-blue-600 to-blue-800 z-50 shadow-2xl md:hidden"
             >
               {/* Close Button */}
               <button

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import teamImg from '../assets/images/teamhero.jpg'; 
 
 const Hero = () => {
   const titleRef = useRef(null);
@@ -9,9 +10,11 @@ const Hero = () => {
   useEffect(() => {
     // Add animation classes after component mounts
     setTimeout(() => {
-      titleRef.current.classList.add('opacity-100', 'translate-y-0');
-      subtitleRef.current.classList.add('opacity-100', 'translate-y-0');
-      ctaRef.current.classList.add('opacity-100', 'translate-y-0');
+      if (titleRef.current && subtitleRef.current && ctaRef.current) {
+        titleRef.current.classList.add('opacity-100', 'translate-y-0');
+        subtitleRef.current.classList.add('opacity-100', 'translate-y-0');
+        ctaRef.current.classList.add('opacity-100', 'translate-y-0');
+      }
     }, 100);
   }, []);
 
@@ -26,20 +29,11 @@ const Hero = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center brightness-[0.8]"
           style={{ 
-            backgroundImage: "url('https://www.whitevoid.com/wordpress/wp-content/uploads/2019/02/16-9-Flare-Facade-WHITEvoid-01-1920x1080.jpg')" 
+            backgroundImage: `url(${teamImg})` 
           }}
         />
-        {/* Right-side curved gradient overlay */}
-        <div className="absolute inset-0">
-          <div 
-            className="absolute right-0 top-0 bottom-0 w-[75%] overflow-hidden"
-            style={{
-              background: 'linear-gradient(360deg, rgba(30, 64, 175, 0.2) 50%, rgba(37, 99, 235, 0.05)), transparent',
-              borderTopLeftRadius: '0%',
-              borderBottomLeftRadius: '100%'
-            }}
-          />
-        </div>
+        {/* Subtle gradient overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-transparent"></div>
       </div>
       
       {/* Content */}

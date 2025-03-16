@@ -252,15 +252,27 @@ const WhatsappWidget = () => {
                 backgroundColor: '#128C7E', // Authentic WhatsApp green
                 border: 'none',
                 borderRadius: '50%',
-                width: '35px',
-                height: '35px',
+                width: isMobile ? '40px' : '35px', // Slightly larger on mobile
+                height: isMobile ? '40px' : '35px', // Slightly larger on mobile
+                minWidth: isMobile ? '40px' : '35px', // Ensure minimum width on mobile
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.2)', // Add shadow for better visibility
+                touchAction: 'manipulation', // Improve touch handling
+                WebkitTapHighlightColor: 'transparent', // Remove tap highlight on mobile
               }}
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+              <svg 
+                width={isMobile ? "24" : "20"} 
+                height={isMobile ? "24" : "20"} 
+                viewBox="0 0 24 24" 
+                fill="white"
+                style={{
+                  marginLeft: isMobile ? '2px' : '0', // Small alignment adjustment for mobile
+                }}
+              >
                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
               </svg>
             </button>
