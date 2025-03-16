@@ -45,6 +45,22 @@ const processes = [
   }
 ];
 
+// First, let's add these variants above the ProcessSection component
+const cardVariants = {
+  hidden: (index) => ({
+    opacity: 0,
+    x: index % 2 === 0 ? -100 : 100,
+  }),
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+    },
+  },
+};
+
 const ProcessSection = () => {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: false, margin: "-100px" });
@@ -140,9 +156,11 @@ const ProcessSection = () => {
             {processes.map((process, index) => (
               <motion.div 
                 key={process.id}
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                transition={{ duration: 0.7, delay: index * 0.2 }}
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, margin: "-100px" }}
+                variants={cardVariants}
                 className={`md:flex md:items-center md:gap-8 ${
                   index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
@@ -150,14 +168,6 @@ const ProcessSection = () => {
                 {/* Step circle with number */}
                 <div className="hidden md:flex items-center justify-center">
                   <motion.div 
-                    initial={{ scale: 0 }}
-                    animate={isInView ? { scale: 1 } : { scale: 0 }}
-                    transition={{ 
-                      type: "spring", 
-                      stiffness: 260, 
-                      damping: 20, 
-                      delay: 0.1 + index * 0.2 
-                    }}
                     className="flex-shrink-0 w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl font-bold shadow-lg relative z-20"
                   >
                     {process.id}

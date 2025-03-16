@@ -198,14 +198,14 @@ const MobileServicesSection = ({ services, activeIndex, contentVariants, cardVar
       </div>
       
       {/* Title section */}
-      <div className="sticky top-0 bg-gradient-to-b from-blue-900 to-blue-900/80 z-10">
+      <div className="sticky bg-gradient-to-b from-blue-900 to-blue-900/80 z-10">
         <motion.div
           className="inline-block relative mx-auto text-center w-full"
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl font-bold text-white relative z-10">
+          <h1 className="text-3xl font-bold text-white relative z-10 mt-8">
             Unsere Leistungen
           </h1>
           <motion.div

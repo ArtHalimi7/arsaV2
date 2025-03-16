@@ -50,7 +50,7 @@ const BeforeAfterGallery = () => {
         {/* Left section - modify for mobile */}
         <div className="w-full lg:w-[40%] min-h-screen lg:h-screen lg:sticky top-0 
             flex items-center px-6 lg:px-12 py-12 lg:py-0">
-          <div className="max-w-xl space-y-8 w-full">
+          <div className="max-w-xl space-y-8 w-full relative z-50">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -129,20 +129,20 @@ const BeforeAfterGallery = () => {
               transition={{ delay: 1.2 }}
               className="mt-8 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg 
                         shadow-lg transition-all duration-300 transform hover:scale-105 
-                        flex items-center space-x-3 group relative overflow-hidden"
+                        flex items-center space-x-3 group relative overflow-hidden z-50 pointer-events-auto"
               onClick={handleViewMoreClick}
             >
-              <span className="relative z-10 font-semibold">Mehr Projekte entdecken</span>
+              <span className="relative z-50 font-semibold">Mehr Projekte entdecken</span>
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5 transform group-hover:translate-x-1 transition-transform relative z-10" 
+                className="h-5 w-5 transform group-hover:translate-x-1 transition-transform relative z-50" 
                 fill="none" 
                 viewBox="0 0 24 24" 
                 stroke="currentColor"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-              <div className="absolute inset-0 bg-blue-500 transform -skew-x-12 -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-blue-500 transform -skew-x-12 -translate-x-full group-hover:translate-x-0 transition-transform duration-500 z-40" />
             </motion.button>
 
             {/* Decorative dots */}
@@ -297,7 +297,7 @@ const BeforeAfterGallery = () => {
       </div>
       
       {/* Subtle grid pattern overlay - represents drywall panels */}
-      <div className="hidden lg:block absolute inset-0 opacity-5 z-0">
+      <div className="hidden lg:block absolute inset-0 opacity-5 z-0 pointer-events-none">
         <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
           <pattern id="drywall" patternUnits="userSpaceOnUse" width="100" height="100">
             <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#000" strokeWidth="1"/>
