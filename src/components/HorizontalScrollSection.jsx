@@ -59,7 +59,7 @@ const HorizontalScrollSection = () => {
   const x = useTransform(
     scrollYProgress,
     [0, 1],
-    ["0%", "-36%"]
+    ["0%", "-72%"]
   );
 
   // Additional animations for decorative elements
@@ -109,9 +109,8 @@ const HorizontalScrollSection = () => {
       }
     }),
     active: { 
-      scale: 1.05,
-      y: -20,
-      boxShadow: "0 30px 60px rgba(0,0,0,0.3)",
+      scale: 1,
+      y: 0,
       transition: { 
         type: "spring", 
         stiffness: 300,
@@ -119,7 +118,7 @@ const HorizontalScrollSection = () => {
       }
     },
     inactive: { 
-      scale: 0.95,
+      scale: 1,
       transition: { 
         type: "spring", 
         stiffness: 300,
@@ -199,7 +198,7 @@ const MobileServicesSection = ({ services, activeIndex, contentVariants, cardVar
       </div>
       
       {/* Title section */}
-      <div className="sticky top-0 pt-6 pb-3 bg-gradient-to-b from-blue-900 to-blue-900/80 z-10">
+      <div className="sticky top-0 bg-gradient-to-b from-blue-900 to-blue-900/80 z-10">
         <motion.div
           className="inline-block relative mx-auto text-center w-full"
           initial={{ opacity: 0, y: -50 }}
@@ -371,50 +370,11 @@ const DesktopServicesSection = ({ services, activeIndex, contentVariants, cardVa
           <rect width="100%" height="100%" fill="url(#blueprint)" />
         </svg>
       </motion.div>
-      
-      {/* Move decorative elements outside the sticky container */}
-      <div className="fixed bottom-0 left-0 right-0 h-32 pointer-events-none z-50">
-        {/* Construction tools silhouette */}
-        <motion.div 
-          className="absolute bottom-8 left-8"
-          style={{ rotate: toolRotation }}
-        >
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5">
-            <path d="M3 21h18M3 3v18M21 3v18M12 8l4 4M8 12l4 4" strokeLinecap="round"/>
-            <circle cx="12" cy="12" r="6" strokeDasharray="4 4"/>
-          </svg>
-        </motion.div>
-
-        {/* Paint splash effect */}
-        <motion.div 
-          className="absolute bottom-12 right-12"
-          style={{ scale: paintSplashScale }}
-        >
-          <svg width="80" height="80" viewBox="0 0 24 24" fill="#3b82f6" opacity="0.2">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-          </svg>
-        </motion.div>
-
-        {/* Progress line */}
-        <motion.div 
-          className="absolute bottom-0 left-0 h-1 bg-blue-400 w-full origin-left"
-          style={{ scaleX: scrollYProgress }}
-        />
-
-        {/* Technical measurement indicators */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-between px-8 text-blue-400 text-sm opacity-30">
-          <span>0.00</span>
-          <span>|</span>
-          <span>|</span>
-          <span>|</span>
-          <span>100.00</span>
-        </div>
-      </div>
-
+    
       {/* Sticky container for main content */}
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
         {/* Title section */}
-        <div className="absolute top-20 left-0 right-0 text-center mx-auto px-4">
+        <div className="absolute top-12 left-0 right-0 text-center mx-auto px-4">
           <motion.div
             className="inline-block relative"
             initial={{ opacity: 0, y: -50 }}
@@ -442,7 +402,7 @@ const DesktopServicesSection = ({ services, activeIndex, contentVariants, cardVa
         </div>
         
         {/* Horizontal scrolling cards */}
-        <motion.div style={{ x }} className="flex gap-6 lg:gap-8 pl-6 lg:pl-8">
+        <motion.div style={{ x }} className="flex gap-24 pl-6 lg:pl-8"> {/* Increased gap from 6/8 to 24 */}
           {services.map((service, index) => (
             <AnimatePresence key={index}>
               <motion.div
@@ -452,105 +412,117 @@ const DesktopServicesSection = ({ services, activeIndex, contentVariants, cardVa
                 animate={index === activeIndex ? "active" : "inactive"}
                 variants={cardVariants}
                 viewport={{ once: false, margin: "-20%" }}
-                className="relative flex-shrink-0 w-[500px] h-[450px] lg:w-[700px] lg:h-[500px] overflow-hidden rounded-2xl transform-gpu"
-                whileHover={{ 
-                  scale: 1.03, 
-                  transition: { duration: 0.2 } 
-                }}
+                className="relative flex-shrink-0 w-[1500px] h-[500px] overflow-hidden transform-gpu flex gap-16" // Increased gap, removed hover
               >
-                {/* Decorative corners */}
-                <div className="absolute top-0 left-0 w-10 h-10 border-t-2 border-l-2 border-blue-300 opacity-70 z-20"></div>
-                <div className="absolute top-0 right-0 w-10 h-10 border-t-2 border-r-2 border-blue-300 opacity-70 z-20"></div>
-                <div className="absolute bottom-0 left-0 w-10 h-10 border-b-2 border-l-2 border-blue-300 opacity-70 z-20"></div>
-                <div className="absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2 border-blue-300 opacity-70 z-20"></div>
-                
-                {/* Background image */}
-                <motion.div
-                  className="absolute inset-0 bg-cover bg-center z-0"
-                  style={{ 
-                    backgroundImage: `url(${service.image})`,
-                    backgroundSize: "110% 110%",
-                    backgroundPosition: "center"
-                  }}
-                  animate={{
-                    backgroundSize: index === activeIndex ? "105% 105%" : "110% 110%",
-                    backgroundPosition: index === activeIndex ? "center" : "center"
-                  }}
-                  transition={{ duration: 3, ease: "easeOut" }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/80" />
-                  
-                  {/* Grid overlay for active card */}
-                  {index === activeIndex && (
-                    <motion.div 
-                      className="absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 0.1 }}
-                      transition={{ delay: 0.3, duration: 0.5 }}
-                    >
-                      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                        <pattern id={`desktop-grid-${index}`} patternUnits="userSpaceOnUse" width="20" height="20">
-                          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#3b82f6" strokeWidth="0.5"/>
-                        </pattern>
-                        <rect width="100%" height="100%" fill={`url(#desktop-grid-${index})`} />
-                      </svg>
-                    </motion.div>
-                  )}
-                </motion.div>
-                
-                {/* Content area with guaranteed visibility */}
-                <div className="relative z-10 p-8 flex flex-col justify-between h-full">
-                  <div>
-                    <motion.h2
-                      custom={0.1}
-                      variants={contentVariants}
-                      className="text-3xl font-bold text-white mb-4"
-                    >
-                      {service.title}
-                    </motion.h2>
-                    
-                    <motion.p
-                      custom={0.3}
-                      variants={contentVariants}
-                      className="text-xl text-blue-200 mb-5"
-                    >
-                      {service.description}
-                    </motion.p>
-                    
-                    <motion.p
-                      custom={0.5}
-                      variants={contentVariants}
-                      className="text-lg text-gray-300"
-                    >
-                      {service.details}
-                    </motion.p>
-                  </div>
-                  
-                  {/* Progress bar indicator */}
-                  <motion.div
-                    initial={{ width: "0%" }}
-                    animate={{ 
-                      width: index === activeIndex ? "100%" : "0%",
-                      opacity: index === activeIndex ? 1 : 0
-                    }}
-                    transition={{ duration: 0.8 }}
-                    className="h-1.5 bg-blue-300 absolute bottom-0 left-0"
-                  />
-                  
-                  {/* Dot indicators */}
-                  {index === activeIndex && (
-                    <div className="absolute bottom-6 right-6 flex space-x-2">
-                      {services.map((_, i) => (
-                        <motion.div 
-                          key={i}
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: i * 0.1 }}
-                          className={`w-3 h-3 rounded-full ${i === index ? 'bg-blue-300' : 'bg-blue-900'}`}
-                        />
-                      ))}
+                {/* Content area - Left side */}
+                <div className="relative z-10 w-[600px] py-12 flex flex-col justify-between">
+                  <div className="h-full flex flex-col justify-between">
+                    <div className="space-y-10"> {/* Increased spacing */}
+                      <motion.h2
+                        custom={0.1}
+                        variants={contentVariants}
+                        className="text-5xl font-bold text-white" // Reduced from 6xl
+                      >
+                        {service.title}
+                      </motion.h2>
+                      
+                      <motion.p
+                        custom={0.3}
+                        variants={contentVariants}
+                        className="text-2xl text-blue-200" // Reduced from 3xl
+                      >
+                        {service.description}
+                      </motion.p>
+                      
+                      <motion.p
+                        custom={0.5}
+                        variants={contentVariants}
+                        className="text-lg text-gray-300 leading-relaxed" // Reduced from xl
+                      >
+                        {service.details}
+                      </motion.p>
+
+                      <motion.div
+                        custom={0.7}
+                        variants={contentVariants}
+                        className="space-y-6"
+                      >
+                        <p className="text-gray-400 text-base leading-relaxed"> {/* Reduced from lg */}
+                          Unsere professionelle Ausführung garantiert höchste Qualität und Langlebigkeit. 
+                          Wir verwenden ausschließlich hochwertige Materialien und arbeiten nach den neuesten 
+                          technischen Standards.
+                        </p>
+                      </motion.div>
                     </div>
-                  )}
+
+                    {/* Progress indicators remain the same */}
+                    <div className="pt-8">
+                      <motion.div
+                        initial={{ width: "0%" }}
+                        animate={{ 
+                          width: index === activeIndex ? "100%" : "0%",
+                          opacity: index === activeIndex ? 1 : 0
+                        }}
+                        transition={{ duration: 0.8 }}
+                        className="h-1.5 bg-blue-300 mb-4"
+                      />
+                      
+                      <div className="flex justify-between items-center">
+                        <span className="text-blue-300 text-sm">{`0${index + 1} / 0${services.length}`}</span>
+                        <div className="flex space-x-2">
+                          {services.map((_, i) => (
+                            <motion.div 
+                              key={i}
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              transition={{ delay: i * 0.1 }}
+                              className={`w-2 h-2 rounded-full ${i === index ? 'bg-blue-300' : 'bg-blue-900'}`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Image area remains the same */}
+                <div className="relative flex-1">
+                  <motion.div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ 
+                      backgroundImage: `url(${service.image})`,
+                      backgroundSize: "130% 130%", // Larger image size
+                      backgroundPosition: "center"
+                    }}
+                    animate={{
+                      backgroundSize: index === activeIndex ? "120% 120%" : "130% 130%", // Larger image size
+                      backgroundPosition: index === activeIndex ? "center" : "center"
+                    }}
+                    transition={{ duration: 3, ease: "easeOut" }}
+                  >
+                    {/* Decorative corners */}
+                    <div className="absolute top-0 left-0 w-10 h-10 border-t-2 border-l-2 border-blue-300 opacity-70"></div>
+                    <div className="absolute top-0 right-0 w-10 h-10 border-t-2 border-r-2 border-blue-300 opacity-70"></div>
+                    <div className="absolute bottom-0 left-0 w-10 h-10 border-b-2 border-l-2 border-blue-300 opacity-70"></div>
+                    <div className="absolute bottom-0 right-0 w-10 h-10 border-b-2 border-r-2 border-blue-300 opacity-70"></div>
+                    
+                    {/* Grid overlay for active card */}
+                    {index === activeIndex && (
+                      <motion.div 
+                        className="absolute inset-0"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.1 }}
+                        transition={{ delay: 0.3, duration: 0.5 }}
+                      >
+                        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                          <pattern id={`desktop-grid-${index}`} patternUnits="userSpaceOnUse" width="20" height="20">
+                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#3b82f6" strokeWidth="0.5"/>
+                          </pattern>
+                          <rect width="100%" height="100%" fill={`url(#desktop-grid-${index})`} />
+                        </svg>
+                      </motion.div>
+                    )}
+                  </motion.div>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -572,9 +544,9 @@ const DesktopServicesSection = ({ services, activeIndex, contentVariants, cardVa
             className="absolute bottom-8 left-8"
             style={{ rotate: toolRotation }}
           >
-            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5">
-              <path d="M3 21h18M3 3v18M21 3v18M12 8l4 4M8 12l4 4" strokeLinecap="round"/>
-              <circle cx="12" cy="12" r="6" strokeDasharray="4 4"/>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="2">
+              <circle cx="12" cy="12" r="10" strokeLinecap="round" strokeDasharray="1 3"/>
+              <path d="M12 8v8M8 12h8" strokeLinecap="round"/>
             </svg>
           </motion.div>
 
