@@ -68,6 +68,10 @@ const HorizontalScrollSection = () => {
   const decorRight = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const decorTop = useTransform(scrollYProgress, [0, 1], ["-5%", "-15%"]);
   const decorBottom = useTransform(scrollYProgress, [0, 1], ["5%", "15%"]);
+  const toolRotation = useTransform(scrollYProgress, [0, 1], [0, 360]);
+  const paintSplashScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 0.8]);
+  const lineProgress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const draftingScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.1, 1]);
   
   // Use scrollYProgress to determine active card
   useEffect(() => {
@@ -162,9 +166,14 @@ const HorizontalScrollSection = () => {
             decorLeft,
             decorRight,
             decorTop,
-            decorBottom
+            decorBottom,
+            toolRotation,         // Add these new decorative animations
+            paintSplashScale,
+            lineProgress,
+            draftingScale
           }}
           x={x}
+          scrollYProgress={scrollYProgress}  // Add this line
         />
       )}
     </>
@@ -328,15 +337,25 @@ const MobileServicesSection = ({ services, activeIndex, contentVariants, cardVar
 };
 
 // Desktop-specific component (your existing section with horizontal scrolling)
-const DesktopServicesSection = ({ services, activeIndex, contentVariants, cardVariants, targetRef, decoratives, x }) => {
-  const { blueprintOpacity, decorLeft, decorRight, decorTop, decorBottom } = decoratives;
+const DesktopServicesSection = ({ services, activeIndex, contentVariants, cardVariants, targetRef, decoratives, x, scrollYProgress }) => {
+  const { 
+    blueprintOpacity, 
+    decorLeft, 
+    decorRight, 
+    decorTop, 
+    decorBottom,
+    toolRotation,         // Add these new decorative animations
+    paintSplashScale,
+    lineProgress,
+    draftingScale
+  } = decoratives;
   
   return (
     <section 
       ref={targetRef} 
       className="relative h-[300vh] bg-gradient-to-b from-blue-800 via-blue-900 to-blue-950"
     >
-      {/* Keep all your existing desktop code */}
+      {/* Blueprint background and other existing decorative elements */}
       <motion.div 
         className="absolute inset-0 pointer-events-none"
         style={{ opacity: blueprintOpacity }}
@@ -353,21 +372,46 @@ const DesktopServicesSection = ({ services, activeIndex, contentVariants, cardVa
         </svg>
       </motion.div>
       
-      {/* Rest of your decorative elements */}
-      <motion.div 
-        className="absolute top-0 left-0 right-0 h-24 pointer-events-none z-10"
-        style={{ y: decorTop }}
-      >
-        <svg width="100%" height="100%" viewBox="0 0 1000 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,50 Q250,80 500,50 T1000,50" 
-                stroke="#3b82f6" fill="none" strokeWidth="2" opacity="0.3" />
-          <path d="M0,20 Q250,50 500,20 T1000,20" 
-                stroke="#3b82f6" fill="none" strokeWidth="1" opacity="0.2" />
-        </svg>
-      </motion.div>
-      
-      {/* Add all other decorative elements as in your original component */}
-      
+      {/* Move decorative elements outside the sticky container */}
+      <div className="fixed bottom-0 left-0 right-0 h-32 pointer-events-none z-50">
+        {/* Construction tools silhouette */}
+        <motion.div 
+          className="absolute bottom-8 left-8"
+          style={{ rotate: toolRotation }}
+        >
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5">
+            <path d="M3 21h18M3 3v18M21 3v18M12 8l4 4M8 12l4 4" strokeLinecap="round"/>
+            <circle cx="12" cy="12" r="6" strokeDasharray="4 4"/>
+          </svg>
+        </motion.div>
+
+        {/* Paint splash effect */}
+        <motion.div 
+          className="absolute bottom-12 right-12"
+          style={{ scale: paintSplashScale }}
+        >
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="#3b82f6" opacity="0.2">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+          </svg>
+        </motion.div>
+
+        {/* Progress line */}
+        <motion.div 
+          className="absolute bottom-0 left-0 h-1 bg-blue-400 w-full origin-left"
+          style={{ scaleX: scrollYProgress }}
+        />
+
+        {/* Technical measurement indicators */}
+        <div className="absolute bottom-4 left-0 right-0 flex justify-between px-8 text-blue-400 text-sm opacity-30">
+          <span>0.00</span>
+          <span>|</span>
+          <span>|</span>
+          <span>|</span>
+          <span>100.00</span>
+        </div>
+      </div>
+
+      {/* Sticky container for main content */}
       <div className="sticky top-0 h-screen flex items-center overflow-hidden">
         {/* Title section */}
         <div className="absolute top-20 left-0 right-0 text-center mx-auto px-4">
@@ -512,6 +556,74 @@ const DesktopServicesSection = ({ services, activeIndex, contentVariants, cardVa
             </AnimatePresence>
           ))}
         </motion.div>
+      </div>
+
+      {/* Decorative elements container */}
+      <div className="sticky top-0 h-screen">
+        {/* Your existing sticky content remains here */}
+        <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+          {/* ... existing content ... */}
+        </div>
+
+        {/* Decorative bottom elements - Changed from fixed to absolute */}
+        <motion.div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10">
+          {/* Construction tools silhouette */}
+          <motion.div 
+            className="absolute bottom-8 left-8"
+            style={{ rotate: toolRotation }}
+          >
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" strokeWidth="1.5">
+              <path d="M3 21h18M3 3v18M21 3v18M12 8l4 4M8 12l4 4" strokeLinecap="round"/>
+              <circle cx="12" cy="12" r="6" strokeDasharray="4 4"/>
+            </svg>
+          </motion.div>
+
+          {/* Paint splash effect */}
+          <motion.div 
+            className="absolute bottom-12 right-12"
+            style={{ scale: paintSplashScale }}
+          >
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="#3b82f6" opacity="0.2">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+            </svg>
+          </motion.div>
+
+          {/* Progress line */}
+          <motion.div 
+            className="absolute bottom-0 left-0 h-1 bg-blue-400"
+            style={{ width: lineProgress }}
+          />
+
+          {/* Technical measurement indicators */}
+          <div className="absolute bottom-4 left-0 right-0 flex justify-between px-8 text-blue-400 text-sm opacity-30">
+            <span>0.00</span>
+            <span>|</span>
+            <span>|</span>
+            <span>|</span>
+            <span>100.00</span>
+          </div>
+        </motion.div>
+
+        {/* Additional floating elements - Changed from fixed to absolute */}
+        <motion.div 
+          className="absolute top-1/2 right-8 transform -translate-y-1/2 opacity-20"
+          style={{ scale: draftingScale }}
+        >
+          <svg width="40" height="120" viewBox="0 0 40 120" fill="none">
+            <path d="M20 0v120M10 20h20M10 60h20M10 100h20" stroke="#3b82f6" strokeWidth="1"/>
+            <circle cx="20" cy="60" r="5" stroke="#3b82f6" strokeWidth="1"/>
+          </svg>
+        </motion.div>
+
+        {/* Blueprint grid overlay - Changed from fixed to absolute */}
+        <div className="absolute inset-0 pointer-events-none opacity-5">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
+              <path d="M 8 0 L 0 0 0 8" fill="none" stroke="#3b82f6" strokeWidth="0.5"/>
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#smallGrid)"/>
+          </svg>
+        </div>
       </div>
     </section>
   );
