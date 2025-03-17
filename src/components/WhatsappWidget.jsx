@@ -225,7 +225,7 @@ const WhatsappWidget = () => {
             padding: '12px',
             backgroundColor: '#f0f0f0',
             display: 'flex',
-            gap: '8px',
+            gap: '12px', // Increased gap
             alignItems: 'center'
           }}>
             <input
@@ -239,7 +239,9 @@ const WhatsappWidget = () => {
                 borderRadius: '20px',
                 border: 'none',
                 outline: 'none',
-                fontSize: '14px'
+                fontSize: '14px',
+                width: isMobile ? 'calc(100% - 60px)' : '100%', // Adjust width on mobile
+                maxWidth: isMobile ? '200px' : 'none' // Limit max width on mobile
               }}
             />
             <button
@@ -249,19 +251,20 @@ const WhatsappWidget = () => {
                 }
               }}
               style={{
-                backgroundColor: '#128C7E', // Authentic WhatsApp green
+                backgroundColor: '#128C7E',
                 border: 'none',
                 borderRadius: '50%',
-                width: isMobile ? '40px' : '35px', // Slightly larger on mobile
-                height: isMobile ? '40px' : '35px', // Slightly larger on mobile
-                minWidth: isMobile ? '40px' : '35px', // Ensure minimum width on mobile
+                width: isMobile ? '45px' : '35px', // Slightly larger on mobile
+                height: isMobile ? '45px' : '35px', // Slightly larger on mobile
+                minWidth: isMobile ? '45px' : '35px', // Ensure minimum width on mobile
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.2)', // Add shadow for better visibility
-                touchAction: 'manipulation', // Improve touch handling
-                WebkitTapHighlightColor: 'transparent', // Remove tap highlight on mobile
+                boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                touchAction: 'manipulation',
+                WebkitTapHighlightColor: 'transparent',
+                marginLeft: 'auto' // Push button to the right
               }}
             >
               <svg 
