@@ -247,7 +247,7 @@ const WhatsappWidget = () => {
             <button
               onClick={() => {
                 if (inputMessage.trim()) {
-                  window.open(`https://wa.me/38344257907?text=${encodeURIComponent(inputMessage)}`, '_blank');
+                  window.open(`https://wa.me/41796590245?text=${encodeURIComponent(inputMessage)}`, '_blank');
                 }
               }}
               style={{
