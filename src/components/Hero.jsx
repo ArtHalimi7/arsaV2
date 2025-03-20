@@ -19,7 +19,7 @@ const Hero = () => {
   }, []);
 
   const handleCallClick = () => {
-    window.location.href = 'tel:+4912345678';
+    window.location.href = 'tel:+41796590245';
   };
 
   return (

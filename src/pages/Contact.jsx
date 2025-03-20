@@ -333,8 +333,8 @@ const ContactForm = () => {
                           </div>
                           <div>
                             <h4 className="font-medium text-blue-800">Telefon</h4>
-                            <a href="tel:+4912345678" className="text-blue-700 hover:text-blue-500 transition-colors">
-                              +49 123 456 789
+                            <a href="tel:+41796590245" className="text-blue-700 hover:text-blue-500 transition-colors">
+                              +41 79 659 02 45
                             </a>
                           </div>
                         </motion.div>
@@ -353,8 +353,8 @@ const ContactForm = () => {
                           </div>
                           <div>
                             <h4 className="font-medium text-blue-800">E-Mail</h4>
-                            <a href="mailto:info@example.com" className="text-blue-700 hover:text-blue-500 transition-colors">
-                              info@example.com
+                            <a href="mailto:redzepi.arsa@gmail.com" className="text-blue-700 hover:text-blue-500 transition-colors">
+                            redzepi.arsa@gmail.com
                             </a>
                           </div>
                         </motion.div>
@@ -374,8 +374,9 @@ const ContactForm = () => {
                           <div>
                             <h4 className="font-medium text-blue-800">Adresse</h4>
                             <p className="text-blue-700">
-                              Musterstraße 123<br />
-                              12345 Berlin
+                            Rigiweg 4
+                            <br />
+                            8604 Volketswil
                             </p>
                           </div>
                         </motion.div>
@@ -395,8 +396,8 @@ const ContactForm = () => {
                           <div>
                             <h4 className="font-medium text-blue-800">Bürozeiten</h4>
                             <p className="text-blue-700">
-                              Mo - Fr: 8:00 - 17:00 Uhr<br />
-                              Sa: 9:00 - 13:00 Uhr
+                              Mo - Fr: <br/>
+                              8:00 - 17:00 Uhr
                             </p>
                           </div>
                         </motion.div>
