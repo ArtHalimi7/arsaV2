@@ -1,14 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './index.css';
 import { Home, About, Projects, Contact} from './pages';
 import Navbar from './components/Navbar';
 import WhatsappWidget from './components/WhatsappWidget';
 import Lenis from '@studio-freight/lenis';
-
+import SplashScreen from './components/ui/splash-screen';
+import { AnimatePresence } from 'framer-motion';
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // 2 seconds
+
     // Initialize Lenis smooth scrolling
     const lenis = new Lenis({
       duration: 1.2,      // Controls the speed of the smooth scrolling
@@ -31,25 +39,28 @@ const App = () => {
 
     // Cleanup function
     return () => {
+      clearTimeout(timer);
       lenis.destroy();
     };
   }, []);
 
   return (
-    <>
-      <main className='background1'>
-        <Router>
-          <Navbar/>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projekte" element={<Projects />} />
-            <Route path="/kontakt" element={<Contact />} />
-          </Routes>
-        </Router>
-        <WhatsappWidget />
-      </main>
-    </>
+    <AnimatePresence mode="wait">
+      {loading ? <SplashScreen /> : (
+        <main className='background1'>
+          <Router>
+            <Navbar/>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/projekte" element={<Projects />} />
+              <Route path="/kontakt" element={<Contact />} />
+            </Routes>
+          </Router>
+          <WhatsappWidget />
+        </main>
+      )}
+    </AnimatePresence>
   );
 }
 
