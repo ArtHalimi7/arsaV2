@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import teamImg from '../assets/images/teamhero.jpg'; 
+import RotatingText from './ui/RotatingText'
+
 
 const Hero = () => {
   const titleRef = useRef(null);
@@ -32,29 +34,44 @@ const Hero = () => {
             backgroundImage: `url(${teamImg})` 
           }}
         />
-        {/* Subtle gradient overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 to-transparent"></div>
       </div>
       
       {/* Content */}
-      <div className="relative z-10 h-full max-w-[1400px] mx-auto px-8 flex flex-col justify-center">
-        <h1 
-          ref={titleRef}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-5 leading-tight tracking-tight opacity-0 translate-y-8 transition-all duration-1000"
-        >
-          Präzision und <span className="text-blue-300">Eleganz</span> in jedem Detail
-        </h1>
+      <div className="relative z-10 h-full max-w-[1400px] mx-auto px-4 md:px-8 lg:pl-16 flex flex-col justify-center">
+        {/* Updated header section with center alignment on mobile */}
+        <div className="flex flex-col items-center md:items-start md:flex-row  gap-2">
+          <span className="text-4xl md:text-5xl lg:text-6xl font-bold text-white whitespace-nowrap text-center md:text-left">
+            IHR PARTNER IN
+          </span>
+          <RotatingText
+            texts={[
+              'TROCKENBAU',
+              'GIPSERARBEITEN',
+              'SPACHTELARBEITEN',
+              'BRANDSCHUTZ'
+            ]}
+            mainClassName="text-4xl md:text-5xl lg:text-6xl font-bold text-blue-400 mb-5 leading-tight tracking-tight mt-2 md:mt-0 text-center md:text-left [text-shadow:_-1px_-1px_0_#fff,_1px_-1px_0_#fff,_-1px_1px_0_#fff,_1px_1px_0_#fff]"
+            staggerFrom={"last"}
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-120%" }}
+            staggerDuration={0.025}
+            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            rotationInterval={3000}
+          />
+        </div>
         
+        {/* Updated paragraph with center alignment on mobile */}
         <p 
-          ref={subtitleRef}
-          className="text-lg md:text-xl font-light text-white/90 max-w-xl mb-8 opacity-0 translate-y-8 transition-all duration-1000 delay-200"
+          className="text-lg md:text-xl font-light text-white/90 max-w-xl mb-8 transition-all duration-1000 mt-4 text-center md:text-left mx-auto md:mx-0"
         >
           ARSA liefert erstklassige Gipser- und Trockenbaulösungen für moderne Wohn- und Geschäftsräume.
         </p>
         
+        {/* Updated buttons container with center alignment on mobile */}
         <div 
-          ref={ctaRef}
-          className="flex flex-col sm:flex-row gap-4 opacity-0 translate-y-8 transition-all duration-1000 delay-400"
+          className="flex flex-col sm:flex-row gap-4 transition-all duration-1000 items-center md:items-start"
         >
           <button 
             onClick={handleCallClick}

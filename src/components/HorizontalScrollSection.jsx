@@ -22,7 +22,7 @@ const services = [
     title: "Trockenbau",
     description: "Professionelle Wandsysteme & Deckenverkleidungen",
     details: "Modernste Techniken für perfekte Raumgestaltung. Vom Metallständerwerk bis zur fertigen Wand – wir schaffen Räume nach Ihren Vorstellungen.",
-    image: "https://trockenbau-muc.de/wp-content/uploads/2024/11/Wandkonstruktion-Trockenbau-mit-Schiebertuer-1024x576.jpg"
+    image: "https://cdn.leonardo.ai/users/fdd53a29-3a4f-42df-8cb9-b4be7d1b3add/generations/9481fe97-c10c-4b3a-95bc-b74fbb20f235/Leonardo_Phoenix_10_A_highly_detailed_crosssectional_view_of_a_0.jpg"
   },
   {
     title: "Spachtelarbeiten",

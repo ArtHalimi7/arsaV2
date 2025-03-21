@@ -133,7 +133,7 @@ const Navbar = () => {
                   >
                     <Link
                       to={item.href}
-                      className={`${!isScrolled ? 'text-blue-900' : 'text-white'} text-2xl font-medium relative group overflow-hidden`} // Conditional text color
+                      className={`${!isScrolled ? 'text-blue-400' : 'text-white'} text-2xl font-medium relative group overflow-hidden`} // Conditional text color
                     >
                       <span className="relative z-10 drop-shadow-lg">{item.title}</span>
                       
