@@ -48,7 +48,6 @@ const Hero = () => {
               'TROCKENBAU',
               'GIPSERARBEITEN',
               'SPACHTELARBEITEN',
-              'BRANDSCHUTZ'
             ]}
             mainClassName="text-4xl md:text-5xl lg:text-6xl font-bold text-blue-400 mb-5 leading-tight tracking-tight mt-2 md:mt-0 text-center md:text-left [text-shadow:_-1px_-1px_0_#fff,_1px_-1px_0_#fff,_-1px_1px_0_#fff,_1px_1px_0_#fff]"
             staggerFrom={"last"}

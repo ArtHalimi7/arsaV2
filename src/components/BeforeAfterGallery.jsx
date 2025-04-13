@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import bathroom from '../assets/images/bathroom.jpg';
+import maler from '../assets/images/maler.jpg';
+import umbau from '../assets/images/umbau.jpg';
+import gipser from '../assets/images/gipser.jpg';
 
 // Update the projects array at the top of the file
 const projects = [
@@ -8,31 +12,25 @@ const projects = [
     id: 1,
     title: "Gipsergeschäft",
     description: "Professionelle Gipserarbeiten für ein perfektes Finish",
-    img: "https://www.gclproducts.co.uk/blog/wp-content/uploads/sites/10/2021/12/Top-10-great-facts-about-plastering-scaled.jpeg"
+    img: gipser
   },
   {
     id: 2,
     title: "Umbauarbeiten",
     description: "Komplette Raumgestaltung und Renovierung",
-    img: "https://mobiliar.rokka.io/dynamic/noop/5bd64e6b686a24deb61ddd9a5ac3099ba80b7ce3/teppich-entfernen-umbau-wohnzimmer.jpg"
+    img: umbau
   },
   {
     id: 3,
     title: "Malerarbeiten",
     description: "Präzise Farbgestaltung für Ihre Räume",
-    img: "https://www.imbachmaler.ch/files/images/header/imbach-maler-team.jpg"
-  },
-  {
-    id: 4,
-    title: "Bodenarbeiten",
-    description: "Professionelle Verlegung verschiedener Bodenbeläge",
-    img: "https://www.infina.at/fileadmin/content/Ratgeber/renovierung_sanierung_modernisierung.jpg"
+    img: maler
   },
   {
     id: 5,
     title: "Badezimmer Renovation",
     description: "Moderne Badezimmer nach Ihren Wünschen",
-    img: "https://www.badtraum24.de/blog/wp-content/uploads/sites/2/2024/02/Luxry_Bathroom_2-scaled.jpg"
+    img: bathroom
   }
 ];
 

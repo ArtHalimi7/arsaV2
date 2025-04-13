@@ -36,12 +36,6 @@ const services = [
     details: "Innovative Akustiklösungen für Büros, Konferenzräume und Wohnbereiche. Wir optimieren die Raumakustik für maximalen Komfort.",
     image: "https://akustikbau-mack.de/wp-content/uploads/2018/04/Mack-Banner.jpg"
   },
-  {
-    title: "Brandschutz",
-    description: "Sichere & normgerechte Brandschutzsysteme",
-    details: "Zertifizierte Brandschutzsysteme nach aktuellen Normen. Wir garantieren höchste Sicherheitsstandards für Ihr Gebäude.",
-    image: "https://www.heinrich-schmid.com/fileadmin/user_upload/leistung-brandschutz-brandschutz-im-trockenbau-intro.jpg"
-  }
 ];
 
 
