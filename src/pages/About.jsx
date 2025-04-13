@@ -338,7 +338,7 @@ const About = () => {
                   <div className="absolute -top-3 -left-3 w-full h-full border-2 border-blue-300/30 rounded-full"></div>
                   <div className="rounded-full overflow-hidden shadow-xl relative z-10" style={{ aspectRatio: "1/1" }}>
                     <img 
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" 
+                      src="https://sdmntpreastus2.oaiusercontent.com/files/00000000-460c-61f6-b13b-a444e719907e/raw?se=2025-04-13T12%3A38%3A55Z&sp=r&sv=2024-08-04&sr=b&scid=491806c8-230c-502d-86a0-3e160fe5e6b4&skoid=06d77cea-897f-49c6-9d78-20f6510f72af&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-13T08%3A22%3A35Z&ske=2025-04-14T08%3A22%3A35Z&sks=b&skv=2024-08-04&sig=xs%2BjAM3f4oAA1OMagfSnO%2B4NYGJYFXIRAgoPijM1I0s%3D" 
                       alt="Martin Weber" 
                       className="w-full h-full object-cover object-center"
                     />
@@ -379,8 +379,8 @@ const About = () => {
                   <div className="absolute -top-3 -left-3 w-full h-full border-2 border-blue-300/30 rounded-full"></div>
                   <div className="rounded-full overflow-hidden shadow-xl relative z-10" style={{ aspectRatio: "1/1" }}>
                     <img 
-                      src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" 
-                      alt="Julia Becker" 
+                      src="https://sdmntprpolandcentral.oaiusercontent.com/files/00000000-0f40-620a-98c4-f93a83632361/raw?se=2025-04-13T11%3A46%3A49Z&sp=r&sv=2024-08-04&sr=b&scid=a8a8749a-3f43-5523-bdbc-f46a959ce024&skoid=06d77cea-897f-49c6-9d78-20f6510f72af&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-13T07%3A56%3A32Z&ske=2025-04-14T07%3A56%3A32Z&sks=b&skv=2024-08-04&sig=PeNNj5OXzY5cPSCloOobRhyViJyf6VRJViqtqPxme1g%3D" 
+                      alt="Kevin Becker" 
                       className="w-full h-full object-cover object-center"
                     />
                   </div>
@@ -395,8 +395,8 @@ const About = () => {
                 whileInView="visible"
                 viewport={{ once: false, margin: "-100px" }}
               >
-                <h3 className="text-2xl md:text-3xl font-bold text-blue-900 mb-3">Julia Becker</h3>
-                <h4 className="text-lg text-blue-600 mb-4">Projektleiterin</h4>
+                <h3 className="text-2xl md:text-3xl font-bold text-blue-900 mb-3">Kevin Becker</h3>
+                <h4 className="text-lg text-blue-600 mb-4">Projektleiter</h4>
                 <div className="w-20 h-1 bg-blue-500 mb-6"></div>
                 <p className="text-gray-700 mb-4">
                   Julia koordiniert unsere größten Projekte und sorgt dafür, dass alles pünktlich und zur vollsten Zufriedenheit unserer Kunden umgesetzt wird. Mit ihrem Auge für Detail und ihrer strukturierten Arbeitsweise garantiert sie reibungslose Abläufe.
@@ -420,8 +420,8 @@ const About = () => {
                   <div className="absolute -top-3 -left-3 w-full h-full border-2 border-blue-300/30 rounded-full"></div>
                   <div className="rounded-full overflow-hidden shadow-xl relative z-10" style={{ aspectRatio: "1/1" }}>
                     <img 
-                      src="https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=398&q=80" 
-                      alt="Thomas Müller" 
+                      src="https://sdmntpraustraliaeast.oaiusercontent.com/files/00000000-b034-61fa-80c8-325c530aab2b/raw?se=2025-04-13T11%3A49%3A31Z&sp=r&sv=2024-08-04&sr=b&scid=46ce6d07-eb7b-50a0-a89c-d345c6705317&skoid=06d77cea-897f-49c6-9d78-20f6510f72af&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-04-12T23%3A39%3A19Z&ske=2025-04-13T23%3A39%3A19Z&sks=b&skv=2024-08-04&sig=cSx89kPQP0ICPUeAl7JLOTJuQjd2SvfTLx4aQeFyZ%2BI%3D" 
+                      alt="David Müller" 
                       className="w-full h-full object-cover object-center"
                     />
                   </div>
@@ -436,7 +436,7 @@ const About = () => {
                 whileInView="visible"
                 viewport={{ once: false, margin: "-100px" }}
               >
-                <h3 className="text-2xl md:text-3xl font-bold text-blue-900 mb-3">Thomas Müller</h3>
+                <h3 className="text-2xl md:text-3xl font-bold text-blue-900 mb-3">David Müller</h3>
                 <h4 className="text-lg text-blue-600 mb-4">Meister Trockenbau</h4>
                 <div className="w-20 h-1 bg-blue-500 mb-6"></div>
                 <p className="text-gray-700 mb-4">
