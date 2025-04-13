@@ -414,7 +414,7 @@ const ContactForm = () => {
                     >
                       <div className="flex items-center justify-center p-4 border-t border-blue-100">
                         <BuildingOfficeIcon className="w-8 h-8 text-blue-500 opacity-70 mr-3" />
-                        <p className="text-blue-800 font-medium">ARSA GmbH</p>
+                        <p className="text-blue-800 font-medium">ARSA</p>
                       </div>
                     </motion.div>
 

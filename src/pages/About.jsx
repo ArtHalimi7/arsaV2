@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import teamImg from '../assets/images/team.jpg'; // Add a team image to your assets
+import teamImg from '../assets/images/team.png';
 
 const About = () => {
   // Add scroll to top effect when component mounts
@@ -175,8 +175,7 @@ const About = () => {
                 <img 
                   src={teamImg} 
                   alt="Unser Team" 
-                  className="w-full h-auto object-cover rounded-xl shadow-xl relative z-10"
-                  style={{ aspectRatio: "4/3" }}
+                  className="object-cover rounded-xl shadow-xl relative z-10"
                 />
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-500/10 rounded-xl z-0"></div>
               </div>
@@ -355,7 +354,7 @@ const About = () => {
                 whileInView="visible"
                 viewport={{ once: false, margin: "-100px" }}
               >
-                <h3 className="text-2xl md:text-3xl font-bold text-blue-900 mb-3">Martin Weber</h3>
+                <h3 className="text-2xl md:text-3xl font-bold text-blue-900 mb-3">Arsim Redzepi</h3>
                 <h4 className="text-lg text-blue-600 mb-4">Geschäftsführer</h4>
                 <div className="w-20 h-1 bg-blue-500 mb-6"></div>
                 <p className="text-gray-700 mb-4">

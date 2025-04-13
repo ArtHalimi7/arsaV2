@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaFacebook, FaInstagram } from 'react-icons/fa';
 
 const openingHours = [
   { day: 'Montag - Freitag', hours: '07:00 - 17:00' },
@@ -18,7 +18,6 @@ const quickLinks = [
 const socialLinks = [
   { icon: FaFacebook, href: '#', label: 'Facebook' },
   { icon: FaInstagram, href: '#', label: 'Instagram' },
-  { icon: FaLinkedin, href: '#', label: 'LinkedIn' },
 ];
 
 const Footer = () => {
@@ -144,12 +143,12 @@ const Footer = () => {
           transition={{ delay: 0.5 }}
           className="pt-4 border-t border-blue-800/30 text-center text-blue-200/60"
         >
-          <p className="text-sm mb-1">© 2024 ARSA. Alle Rechte vorbehalten.</p>
+          <p className="text-sm mb-1">© 2025 ARSA. Alle Rechte vorbehalten.</p>
           <a
             href="https://arthalimi.netlify.app"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm inline-block hover:text-white transition-colors duration-300"
+            className="text-sm inline-block hover:text-white transition-colors duration-300 text-blue-300"
           >
             Entwickelt von Art Halimi
           </a>
