@@ -1,5 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import drywall from '../assets/images/drywall.jpg';
+import filling from '../assets/images/filling.jpg';
+import panel from '../assets/images/panel.jpg';
 
 const useMediaQuery = (query) => {
   const [matches, setMatches] = useState(false);
@@ -22,19 +25,19 @@ const services = [
     title: "Trockenbau",
     description: "Professionelle Wandsysteme & Deckenverkleidungen",
     details: "Modernste Techniken für perfekte Raumgestaltung. Vom Metallständerwerk bis zur fertigen Wand – wir schaffen Räume nach Ihren Vorstellungen.",
-    image: "https://cdn.leonardo.ai/users/fdd53a29-3a4f-42df-8cb9-b4be7d1b3add/generations/9481fe97-c10c-4b3a-95bc-b74fbb20f235/Leonardo_Phoenix_10_A_highly_detailed_crosssectional_view_of_a_0.jpg"
+    image: drywall
   },
   {
     title: "Spachtelarbeiten",
     description: "Perfekte Oberflächengestaltung",
     details: "Glatte Wände und makellose Oberflächen sind unsere Spezialität. Mit präziser Handarbeit und hochwertigen Materialien erreichen wir optimale Ergebnisse.",
-    image: "https://www.trockenbau-ivkovic.de/images/3003/0/0/spachtelarbeiten.jpg"
+    image: filling
   },
   {
     title: "Akustikbau",
     description: "Optimale Raumakustik für jeden Bereich",
     details: "Innovative Akustiklösungen für Büros, Konferenzräume und Wohnbereiche. Wir optimieren die Raumakustik für maximalen Komfort.",
-    image: "https://akustikbau-mack.de/wp-content/uploads/2018/04/Mack-Banner.jpg"
+    image: panel
   },
 ];
 
