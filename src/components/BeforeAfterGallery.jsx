@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import bathroom from '../assets/images/bathroom.jpg';
+import bathroom from '../assets/images/bathroom2.jpg';
 import maler from '../assets/images/maler.jpg';
 import umbau from '../assets/images/umbau.jpg';
 import gipser from '../assets/images/gipser.jpg';
 
-// Update the projects array at the top of the file
 const projects = [
   {
     id: 1,
@@ -43,7 +42,6 @@ const BeforeAfterGallery = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white relative">
-      {/* Change flex to flex-col on mobile */}
       <div className="flex flex-col lg:flex-row">
         {/* Left section - modify for mobile */}
         <div className="w-full lg:w-[40%] min-h-screen lg:h-screen lg:sticky top-0 

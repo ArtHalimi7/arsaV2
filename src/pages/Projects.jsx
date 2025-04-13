@@ -4,6 +4,14 @@ import beforeImg from '../assets/images/before1.png';
 import afterImg from '../assets/images/after1.png';
 import beforeImg2 from '../assets/images/before2.png';
 import afterImg2 from '../assets/images/after2.png';
+import gipser from '../assets/images/gipser.jpg';
+import umbau from '../assets/images/umbau.jpg';
+import maler from '../assets/images/maler.jpg';
+import renovation from '../assets/images/renovation.jpg';
+import bathroom from '../assets/images/bathroom2.jpg';
+import kitchen from '../assets/images/kitchen.jpg';
+import floor from '../assets/images/floor.jpg'; 
+import ceiling from '../assets/images/ceiling.jpg';
 
 // Brick Animation Component from Hero.jsx
 const AnimatedBrick = ({ x, y, delay }) => {
@@ -403,7 +411,7 @@ const Services = () => {
             transition={{ duration: 0.3 }}
           >
             <motion.img 
-              src="https://www.gclproducts.co.uk/blog/wp-content/uploads/sites/10/2021/12/Top-10-great-facts-about-plastering-scaled.jpeg" 
+              src={gipser}
               alt="Gipsergeschäft" 
               className="w-full h-full object-cover transition-transform duration-700"
               whileHover={{ scale: 1.05 }}
@@ -428,7 +436,7 @@ const Services = () => {
             transition={{ duration: 0.3 }}
           >
             <motion.img 
-              src="https://mobiliar.rokka.io/dynamic/noop/5bd64e6b686a24deb61ddd9a5ac3099ba80b7ce3/teppich-entfernen-umbau-wohnzimmer.jpg" 
+              src={umbau} 
               alt="Umbauarbeiten" 
               className="w-full h-full object-cover transition-transform duration-700"
               whileHover={{ scale: 1.05 }}
@@ -453,7 +461,7 @@ const Services = () => {
             transition={{ duration: 0.3 }}
           >
             <motion.img 
-              src="https://www.imbachmaler.ch/files/images/header/imbach-maler-team.jpg" 
+              src={maler} 
               alt="Malergeschäft" 
               className="w-full h-full object-cover transition-transform duration-700"
               whileHover={{ scale: 1.05 }}
@@ -478,7 +486,7 @@ const Services = () => {
             transition={{ duration: 0.3 }}
           >
             <motion.img 
-              src="https://www.infina.at/fileadmin/content/Ratgeber/renovierung_sanierung_modernisierung.jpg" 
+              src={renovation} 
               alt="Renovierung" 
               className="w-full h-full object-cover transition-transform duration-700"
               whileHover={{ scale: 1.05 }}
@@ -494,7 +502,7 @@ const Services = () => {
           
           {/* 5. Bathroom renovation */}
           <motion.div 
-            className="w-full h-80 overflow-hidden group relative"
+            className="w-full md:h-[600px] h-80 overflow-hidden group relative"
             variants={imageVariants}
             initial="hidden"
             whileInView="visible"
@@ -503,7 +511,7 @@ const Services = () => {
             transition={{ duration: 0.3 }}
           >
             <motion.img 
-              src="https://www.badtraum24.de/blog/wp-content/uploads/sites/2/2024/02/Luxry_Bathroom_2-scaled.jpg" 
+              src={bathroom} 
               alt="Badezimmer Umbau" 
               className="w-full h-full object-cover transition-transform duration-700"
               whileHover={{ scale: 1.05 }}
@@ -528,7 +536,7 @@ const Services = () => {
             transition={{ duration: 0.3 }}
           >
             <motion.img 
-              src="https://bautrends.ch/wp-content/uploads/2019/08/Kche-4-scaled.jpg" 
+              src={kitchen} 
               alt="Küche Renovation" 
               className="w-full h-full object-cover transition-transform duration-700"
               whileHover={{ scale: 1.05 }}
@@ -569,7 +577,7 @@ const Services = () => {
           
           {/* 8. Flooring work */}
           <motion.div 
-            className="w-full h-80 overflow-hidden group relative"
+            className="w-full md:h-[550px] overflow-hidden group relative"
             variants={imageVariants}
             initial="hidden"
             whileInView="visible"
@@ -578,7 +586,7 @@ const Services = () => {
             transition={{ duration: 0.3 }}
           >
             <motion.img 
-              src="https://www.stilartmoebel.de/zuhause-bei-sam/wp-content/uploads/2017/09/vinyl-pvc-boden-tipps.jpg" 
+              src={floor}
               alt="Bodenbelag" 
               className="w-full h-full object-cover transition-transform duration-700"
               whileHover={{ scale: 1.05 }}
@@ -594,7 +602,7 @@ const Services = () => {
           
           {/* 9. Ceiling work */}
           <motion.div 
-            className="w-full h-80 overflow-hidden group relative mb-20"
+            className="w-full md:h-[550px] overflow-hidden group relative mb-20"
             variants={imageVariants}
             initial="hidden"
             whileInView="visible"
@@ -603,7 +611,7 @@ const Services = () => {
             transition={{ duration: 0.3 }}
           >
             <motion.img 
-              src="https://mdinnenausbau-kumic.de/wp-content/uploads/AdobeStock_646215069-1024x574.jpeg" 
+              src={ceiling} 
               alt="Deckenarbeit" 
               className="w-full h-full object-cover transition-transform duration-700"
               whileHover={{ scale: 1.05 }}
