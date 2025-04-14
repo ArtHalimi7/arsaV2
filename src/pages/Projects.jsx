@@ -11,7 +11,6 @@ import renovation from '../assets/images/renovation.jpg';
 import bathroom from '../assets/images/bathroom2.jpg';
 import kitchen from '../assets/images/kitchen.jpg';
 import floor from '../assets/images/floor.jpg'; 
-import ceiling from '../assets/images/ceiling.jpg';
 
 // Brick Animation Component from Hero.jsx
 const AnimatedBrick = ({ x, y, delay }) => {
@@ -596,31 +595,6 @@ const Services = () => {
               <div className="absolute bottom-6 left-6 text-white">
                 <h3 className="text-xl font-semibold">Bodenbelag</h3>
                 <p className="text-sm mt-1">Hochwertige Bodenverlegung</p>
-              </div>
-            </div>
-          </motion.div>
-          
-          {/* 9. Ceiling work */}
-          <motion.div 
-            className="w-full md:h-[550px] overflow-hidden group relative mb-20"
-            variants={imageVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, margin: "-100px" }}
-            whileHover={{ scale: 1.01 }}
-            transition={{ duration: 0.3 }}
-          >
-            <motion.img 
-              src={ceiling} 
-              alt="Deckenarbeit" 
-              className="w-full h-full object-cover transition-transform duration-700"
-              whileHover={{ scale: 1.05 }}
-              initial={{ scale: 1.03 }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="absolute bottom-6 left-6 text-white">
-                <h3 className="text-xl font-semibold">Deckenarbeit</h3>
-                <p className="text-sm mt-1">Akustik- und Designdecken</p>
               </div>
             </div>
           </motion.div>
