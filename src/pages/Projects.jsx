@@ -6,7 +6,7 @@ import beforeImg2 from '../assets/images/before2.png';
 import afterImg2 from '../assets/images/after2.png';
 import gipser from '../assets/images/gipser.jpg';
 import umbau from '../assets/images/umbau.jpg';
-import maler from '../assets/images/maler.jpg';
+import maler from '../assets/images/maler.jpeg';
 import renovation from '../assets/images/renovation.jpg';
 import bathroom from '../assets/images/bathroom2.jpg';
 import kitchen from '../assets/images/kitchen.jpg';

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import bathroom from '../assets/images/bathroom2.jpg';
-import maler from '../assets/images/maler.jpg';
+import maler from '../assets/images/maler.jpeg';
 import umbau from '../assets/images/umbau.jpg';
 import gipser from '../assets/images/gipser.jpg';
 
