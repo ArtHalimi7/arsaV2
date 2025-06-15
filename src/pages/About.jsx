@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import teamImg from '../assets/images/team.png';
-import teammember1 from '../assets/images/teammember1.png';
+import teammember1 from '../assets/images/arsa.jpeg';
 import teammember2 from '../assets/images/teammember2.png';
 import teammember3 from '../assets/images/teammember3.png';
 
