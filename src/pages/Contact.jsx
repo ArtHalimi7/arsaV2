@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import setMeta from '../lib/seo';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import { 
@@ -35,6 +36,11 @@ const ContactForm = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
+    });
+    setMeta({
+      title: 'ARSA Gipser — Kontakt',
+      description: 'Kontaktieren Sie ARSA Gipser in Volketswil für ein unverbindliches Angebot. Telefon, E-Mail und Adresse sind verfügbar.',
+      url: 'https://arsagipser.ch/contact'
     });
   }, []);
   

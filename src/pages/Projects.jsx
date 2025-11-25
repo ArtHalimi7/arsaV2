@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import setMeta from '../lib/seo';
 import { motion, useAnimationControls } from 'framer-motion';
 import beforeImg from '../assets/images/before1.png';
 import afterImg from '../assets/images/after1.png';
@@ -223,6 +224,11 @@ const Services = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
+    });
+    setMeta({
+      title: 'ARSA Gipser — Projekte',
+      description: 'Projektgalerie von ARSA Gipser: Vorher/Nachher-Bilder und abgeschlossene Renovationen. Lassen Sie sich inspirieren.',
+      url: 'https://arsagipser.ch/projects'
     });
   }, []);
   

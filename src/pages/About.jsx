@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import setMeta from '../lib/seo';
 import { motion } from 'framer-motion';
 import teamImg from '../assets/images/team.png';
 import teammember1 from '../assets/images/arsa.jpeg';
@@ -11,6 +12,11 @@ const About = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
+    });
+    setMeta({
+      title: 'ARSA Gipser — Über uns',
+      description: 'Erfahren Sie mehr über ARSA Gipser: Unser Team, unsere Werte und unsere 15+ Jahre Erfahrung in Trockenbau und Renovation in der Schweiz.',
+      url: 'https://arsagipser.ch/about'
     });
   }, []);
 
