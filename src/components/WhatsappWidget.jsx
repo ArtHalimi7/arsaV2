@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReactWhatsapp from 'react-whatsapp';
 import logo from '../assets/images/logo.png';
 
 const WhatsappWidget = () => {
