@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import setMeta from '../lib/seo';
 import Hero from '../components/Hero';
 import AnimatedTextSection from '../components/AnimatedTextSection';

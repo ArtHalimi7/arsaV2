@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import logo from '../assets/images/logo.png';
 
 const WhatsappWidget = () => {
@@ -27,7 +27,7 @@ const WhatsappWidget = () => {
       }, 2000); // Show typing for 2 seconds
     }
     return () => clearTimeout(typingTimeout);
-  }, [isOpen]);
+  }, [isOpen, showMessage]);
 
   // Dots animation
   useEffect(() => {

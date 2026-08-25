@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import setMeta from '../lib/seo';
 import { motion } from 'framer-motion';
 import teamImg from '../assets/images/team.png';
@@ -32,29 +32,6 @@ const About = () => {
       }
     }
   };
-  
-  const valuesData = [
-    {
-      icon: "🏗️",
-      title: "Qualität",
-      description: "Wir verwenden nur hochwertige Materialien und setzen auf präzise Handwerkskunst."
-    },
-    {
-      icon: "⏱️",
-      title: "Zuverlässigkeit",
-      description: "Termintreue und transparente Kommunikation stehen bei uns an erster Stelle."
-    },
-    {
-      icon: "💡",
-      title: "Innovation",
-      description: "Wir bilden uns kontinuierlich weiter und setzen auf moderne Techniken und Materialien."
-    },
-    {
-      icon: "🤝",
-      title: "Kundenzufriedenheit",
-      description: "Ihre Zufriedenheit ist unser oberstes Ziel – wir gehen auf Ihre individuellen Wünsche ein."
-    }
-  ];
   
   const experienceData = [
     { number: "15+", text: "Jahre Erfahrung" },

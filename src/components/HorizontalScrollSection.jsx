@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import drywall from '../assets/images/drywall.jpg';
 import filling from '../assets/images/filling.jpg';
@@ -333,13 +333,9 @@ const MobileServicesSection = ({ services, activeIndex, contentVariants, cardVar
 };
 
 // Desktop-specific component (your existing section with horizontal scrolling)
-const DesktopServicesSection = ({ services, activeIndex, contentVariants, cardVariants, targetRef, decoratives, x, scrollYProgress }) => {
+const DesktopServicesSection = ({ services, activeIndex, contentVariants, cardVariants, targetRef, decoratives, x }) => {
   const { 
     blueprintOpacity, 
-    decorLeft, 
-    decorRight, 
-    decorTop, 
-    decorBottom,
     toolRotation,         // Add these new decorative animations
     paintSplashScale,
     lineProgress,

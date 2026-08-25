@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import setMeta from '../lib/seo';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
@@ -161,12 +161,13 @@ const ContactForm = () => {
           setErrors({...errors, from_name: 'Name muss mindestens 2 Zeichen lang sein'});
         }
         break;
-      case 'from_email':
+      case 'from_email': {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.from_email)) {
           setErrors({...errors, from_email: 'Bitte geben Sie eine gültige E-Mail-Adresse ein'});
         }
         break;
+      }
       case 'phone':
         if (formData.phone && !/^[+\d\s()-]{6,20}$/.test(formData.phone)) {
           setErrors({...errors, phone: 'Bitte geben Sie eine gültige Telefonnummer ein'});

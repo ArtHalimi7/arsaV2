@@ -1,4 +1,3 @@
-import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import bathroom from '../assets/images/bathroom2.jpg';

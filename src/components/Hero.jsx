@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import teamImg from '../assets/images/teamhero.jpg'; 
 import RotatingText from './ui/RotatingText'

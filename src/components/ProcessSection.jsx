@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { motion } from 'framer-motion';
 
 const processes = [
   {
@@ -63,7 +63,6 @@ const cardVariants = {
 
 const ProcessSection = () => {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: false, margin: "-100px" });
   
   return (
     <section className="py-24 bg-gradient-to-br from-blue-50 to-white relative overflow-hidden">
